@@ -3,7 +3,7 @@ package proyectooperativos1gonzalezmicale;
 /**
  *
  * @author Carlos Gonzalez CI: 26.996.222, 
- * Ricardo Micale
+ * Ricardo Micale CI: 27.111.658
  */
 public class Main {
 
