@@ -2,15 +2,13 @@ package proyectooperativos1gonzalezmicale;
 
 /**
  *
- * @author carlo
+ * @author Carlos Gonzalez CI: 26.996.222, 
+ * Ricardo Micale
  */
 public class Main {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
+        System.out.print("Hola Mundo");
     }
     
 }
