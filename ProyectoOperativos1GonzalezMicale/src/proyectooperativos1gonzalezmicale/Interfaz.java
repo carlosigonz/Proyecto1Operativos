@@ -5,11 +5,55 @@
  */
 package proyectooperativos1gonzalezmicale;
 
+import java.util.concurrent.Semaphore;
+
 /**
  *
- * @author ricar
+ * @author Carlos Gonzales
+ * Ricardo Micale
  */
 public class Interfaz extends javax.swing.JFrame {
+    //contadores de la cantidad de partes
+    int contBotones = 0;
+    int contBrazos = 0;
+    int contPiernas = 0;
+    int contCuerpos = 0;
+    //contadores de panas disponibles y panas totales
+    int contPanas = 0;
+    int contPanasTotales = 0;
+    //semaforos para los productores
+    Semaphore mutexBtn;
+    Semaphore mutexBrazos;
+    Semaphore mutexPiernas;
+    Semaphore mutexCuerpo;
+    Semaphore mutexEns;
+    
+    Semaphore semProdBtn;
+    Semaphore semProdBraz;
+    Semaphore semProdPier;
+    Semaphore semProdCuerpo;
+    //semaforo del ensamblador
+    Semaphore semProdEns;
+    
+    Semaphore semConsBtn;
+    Semaphore semConsBraz;
+    Semaphore semConsPier;
+    Semaphore semConsCuerpo;
+    //semaforo del ensamblador
+    Semaphore semConsEns;
+    //nombre de los productores y ensambladores
+    String btnProdName = "boton 1";
+    String brazProdName = "brazos 1";
+    String pierProdName = "piernas 1";
+    String cuerpoProdName = "cuerpos 1";
+    String ensamName = "ensamblador 1";
+    //cantidad productores de cada parte
+    Productor prodBtn = new Productor(semConsBtn, semProdBtn, mutexBtn, btnProdName);
+    Productor prodBrazos = new Productor(semConsBraz, semProdBraz, mutexBrazos, brazProdName);
+    Productor prodPiernas = new Productor(semConsPier, semProdPier, mutexPiernas, pierProdName);
+    Productor prodCuerpos = new Productor(semConsCuerpo, semProdCuerpo, mutexCuerpo, cuerpoProdName);
+    //cantidad ensambladores
+    Ensamblador ensamblador = new Ensamblador(semConsEns, semProdEns, mutexEns, ensamName);
 
     /**
      * Creates new form Interfaz
@@ -71,9 +115,9 @@ public class Interfaz extends javax.swing.JFrame {
         aggCuerpo = new javax.swing.JButton();
         delCuerpo = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        diasRestLabel = new javax.swing.JLabel();
+        jefeLabel = new javax.swing.JLabel();
+        gerenteLabel = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
         ctdBtns = new javax.swing.JLabel();
         ctdBrazos = new javax.swing.JLabel();
@@ -85,7 +129,10 @@ public class Interfaz extends javax.swing.JFrame {
         delEnsamblador = new javax.swing.JButton();
         labelCtdEnsam1 = new javax.swing.JLabel();
         jPanel14 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
+        panasDisponLabel = new javax.swing.JLabel();
+        jPanel15 = new javax.swing.JPanel();
+        panasTotalesLabel = new javax.swing.JLabel();
+        labelCtdEnsam2 = new javax.swing.JLabel();
 
         panelProd1.setBackground(new java.awt.Color(255, 255, 255));
         panelProd1.setPreferredSize(new java.awt.Dimension(330, 160));
@@ -595,17 +642,17 @@ public class Interfaz extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(51, 51, 51));
         jLabel3.setText("Cantidad en almacen");
 
-        jLabel4.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel4.setText("Dias restantes:");
+        diasRestLabel.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        diasRestLabel.setForeground(new java.awt.Color(51, 51, 51));
+        diasRestLabel.setText("Dias restantes:");
 
-        jLabel5.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel5.setText("Jefe:");
+        jefeLabel.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        jefeLabel.setForeground(new java.awt.Color(51, 51, 51));
+        jefeLabel.setText("Jefe:");
 
-        jLabel6.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel6.setText("Gerente:");
+        gerenteLabel.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        gerenteLabel.setForeground(new java.awt.Color(51, 51, 51));
+        gerenteLabel.setText("Gerente:");
 
         jPanel12.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -707,27 +754,49 @@ public class Interfaz extends javax.swing.JFrame {
                 .addComponent(delEnsamblador))
         );
 
-        labelCtdEnsam1.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        labelCtdEnsam1.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
         labelCtdEnsam1.setForeground(new java.awt.Color(51, 51, 51));
         labelCtdEnsam1.setText("Panas disponibles:");
 
         jPanel14.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel7.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("0");
+        panasDisponLabel.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
+        panasDisponLabel.setForeground(new java.awt.Color(51, 51, 51));
+        panasDisponLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panasDisponLabel.setText("0");
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+            .addComponent(panasDisponLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+            .addComponent(panasDisponLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
         );
+
+        jPanel15.setBackground(new java.awt.Color(255, 255, 255));
+
+        panasTotalesLabel.setFont(new java.awt.Font("Verdana", 1, 36)); // NOI18N
+        panasTotalesLabel.setForeground(new java.awt.Color(51, 51, 51));
+        panasTotalesLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        panasTotalesLabel.setText("0");
+
+        javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
+        jPanel15.setLayout(jPanel15Layout);
+        jPanel15Layout.setHorizontalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panasTotalesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+        );
+        jPanel15Layout.setVerticalGroup(
+            jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panasTotalesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        labelCtdEnsam2.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        labelCtdEnsam2.setForeground(new java.awt.Color(51, 51, 51));
+        labelCtdEnsam2.setText("Panas totales:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -752,17 +821,24 @@ public class Interfaz extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(panelProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                            .addComponent(diasRestLabel)
+                            .addComponent(jefeLabel)
+                            .addComponent(gerenteLabel))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labelCtdEnsam1)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(95, 95, 95)
-                                .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap())))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(28, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(labelCtdEnsam1))
+                                .addGap(30, 30, 30)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(labelCtdEnsam2)
+                                    .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -788,16 +864,21 @@ public class Interfaz extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                        .addComponent(jLabel4)
+                        .addComponent(diasRestLabel)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel5)
+                        .addComponent(jefeLabel)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel6)
+                        .addComponent(gerenteLabel)
                         .addGap(28, 28, 28))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(labelCtdEnsam1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labelCtdEnsam1)
+                            .addComponent(labelCtdEnsam2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -927,6 +1008,8 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JButton delCuerpo;
     private javax.swing.JButton delEnsamblador;
     private javax.swing.JButton delPiernas;
+    private javax.swing.JLabel diasRestLabel;
+    private javax.swing.JLabel gerenteLabel;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
@@ -938,16 +1021,13 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
+    private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -956,16 +1036,20 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JLabel jefeLabel;
     private javax.swing.JLabel labelBrazosProd;
     private javax.swing.JLabel labelBrazosProd1;
     private javax.swing.JLabel labelCtdEnsam;
     private javax.swing.JLabel labelCtdEnsam1;
+    private javax.swing.JLabel labelCtdEnsam2;
     private javax.swing.JLabel labelCuerpoProd;
     private javax.swing.JLabel labelCuerpoProd1;
     private javax.swing.JLabel labelPiernasProd;
     private javax.swing.JLabel labelPiernasProd1;
     private javax.swing.JLabel lableBtnProd;
     private javax.swing.JLabel lableBtnProd1;
+    private javax.swing.JLabel panasDisponLabel;
+    private javax.swing.JLabel panasTotalesLabel;
     private javax.swing.JPanel panelProd;
     private javax.swing.JPanel panelProd1;
     // End of variables declaration//GEN-END:variables
