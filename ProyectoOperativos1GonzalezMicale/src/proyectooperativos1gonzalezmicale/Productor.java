@@ -29,8 +29,8 @@ public class Productor extends Thread {
             try {
                 this.semProd.acquire();
                     this.mutex.acquire();
-                        Hilos.r++;
-                        System.out.println("La variable subió a " + Hilos.r + " el hilo " + this.name );
+                        Main.botones++;
+                        System.out.println("La variable subió a " + Main.botones + " el hilo " + this.name );
                     this.mutex.release();
                 this.semCons.release();
             } catch (InterruptedException ex) {
