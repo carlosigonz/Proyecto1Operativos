@@ -72,12 +72,12 @@ public class Interfaz extends javax.swing.JFrame {
     String cuerpoProdName = "cuerpos 1";
     String ensamName = "ensamblador 1";
     //cantidad productores de cada parte
-    Productor prodBtn = new Productor(semConsBtn, semProdBtn, mutexBtn, btnProdName);
-    Productor prodBrazos = new Productor(semConsBraz, semProdBraz, mutexBrazos, brazProdName);
-    Productor prodPiernas = new Productor(semConsPier, semProdPier, mutexPiernas, pierProdName);
-    Productor prodCuerpos = new Productor(semConsCuerpo, semProdCuerpo, mutexCuerpo, cuerpoProdName);
+    Productor[] productoresBtn = new Productor[maxProdBtn];
+    Productor[] productoresBrazos = new Productor[maxProdBrazos];
+    Productor[] productoresPiernas = new Productor[maxProdPiernas];
+    Productor[] productoresCuerpos = new Productor[maxProdCuerpos];
     //cantidad ensambladores
-    Ensamblador ensamblador = new Ensamblador(semConsEns, semProdEns, mutexEns, ensamName);
+    Ensamblador[] ensambladores = new Ensamblador[maxEnsambladores];
     
     /**
      * Creates new form Interfaz
@@ -1050,7 +1050,39 @@ public class Interfaz extends javax.swing.JFrame {
             this.inicioEnsambladores = Integer.parseInt(listaDatos[29]);
             this.maxEnsambladores = Integer.parseInt(listaDatos[31]);
             
+            Semaphore semProd = new Semaphore(6);    
+            Semaphore semCons = new Semaphore(0);
+            Semaphore mutex = new Semaphore(1);
             
+            for (int i = 0; i < maxProdBtn; i++) {
+                String nombre = "botones" + i;
+                Productor prodBtn = new Productor(semCons, semProd, mutex, nombre);
+                this.productoresBtn[i] = prodBtn;
+            }
+            
+            for (int i = 0; i < maxProdBrazos; i++) {
+                String nombre = "brazos" + i;
+                Productor prodBrazos = new Productor(semCons, semProd, mutex, nombre);
+                this.productoresBrazos[i] = prodBrazos;
+            }
+            
+            for (int i = 0; i < maxProdPiernas; i++) {
+                String nombre = "piernas" + i;
+                Productor prodPiernas = new Productor(semCons, semProd, mutex, nombre);
+                this.productoresPiernas[i] = prodPiernas;
+            }
+            
+            for (int i = 0; i < maxProdCuerpos; i++) {
+                String nombre = "cuerpos" + i;
+                Productor prodCuerpos = new Productor(semCons, semProd, mutex, nombre);
+                this.productoresCuerpos[i] = prodCuerpos;
+            }
+            
+            for (int i = 0; i < maxEnsambladores; i++) {
+                String nombre = "ensamblador" + i;
+                Ensamblador ensamblador = new Ensamblador(semCons, semProd, mutex, nombre);
+                this.ensambladores[i] = ensamblador;
+            }
             
         } catch(FileNotFoundException e) {
             System.out.println("Hubo un error en la lectura");
