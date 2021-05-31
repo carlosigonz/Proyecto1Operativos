@@ -5,6 +5,7 @@
  */
 package proyectooperativos1gonzalezmicale;
 
+import java.io.*;
 import java.util.concurrent.Semaphore;
 
 /**
@@ -13,6 +14,10 @@ import java.util.concurrent.Semaphore;
  * Ricardo Micale
  */
 public class Interfaz extends javax.swing.JFrame {
+    //tiempo de un dia
+    int tiempo;
+    //dias entre despacho
+    int dias;
     //contadores de la cantidad de partes
     int contBotones = 0;
     int contBrazos = 0;
@@ -21,6 +26,25 @@ public class Interfaz extends javax.swing.JFrame {
     //contadores de panas disponibles y panas totales
     int contPanas = 0;
     int contPanasTotales = 0;
+    //cantidades iniciales de productores
+    int inicioProdBtn = 0;
+    int inicioProdBrazos = 0;
+    int inicioProdPiernas = 0;
+    int inicioProdCuerpos = 0;
+    int inicioEnsambladores = 0;
+    //cantidad maxima de partes, productores y ensambladores
+    //partes
+    int maxBtn = 0;
+    int maxBrazos = 0;
+    int maxPiernas = 0;
+    int maxCuerpos = 0;
+    //productores
+    int maxProdBtn = 0;
+    int maxProdBrazos = 0;
+    int maxProdPiernas = 0;
+    int maxProdCuerpos = 0;
+    //ensamblador
+    int maxEnsambladores = 0;
     //semaforos para los productores
     Semaphore mutexBtn;
     Semaphore mutexBrazos;
@@ -54,7 +78,7 @@ public class Interfaz extends javax.swing.JFrame {
     Productor prodCuerpos = new Productor(semConsCuerpo, semProdCuerpo, mutexCuerpo, cuerpoProdName);
     //cantidad ensambladores
     Ensamblador ensamblador = new Ensamblador(semConsEns, semProdEns, mutexEns, ensamName);
-
+    
     /**
      * Creates new form Interfaz
      */
@@ -991,6 +1015,47 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void leerTxt() throws IOException {
+        String path = "test\\datos.txt";
+        String linea;
+        String datosTxt = null;
+        String[] listaDatos = null;
+        File archivo = new File(path);
+        
+        try {
+            FileReader fr = new FileReader(archivo);
+            BufferedReader br = new BufferedReader(fr);
+            
+            while((linea = br.readLine()) != null) {
+                if(!linea.isEmpty()) {
+                    datosTxt += linea + "\n";
+                }
+            }
+            listaDatos = datosTxt.split(":");
+            this.tiempo = Integer.parseInt(listaDatos[1]);
+            this.dias = Integer.parseInt(listaDatos[3]);
+            this.maxBtn = Integer.parseInt(listaDatos[5]);
+            this.maxBrazos = Integer.parseInt(listaDatos[7]);
+            this.maxPiernas = Integer.parseInt(listaDatos[9]);
+            this.maxCuerpos = Integer.parseInt(listaDatos[11]);
+            this.inicioProdBtn = Integer.parseInt(listaDatos[13]);
+            this.maxProdBtn = Integer.parseInt(listaDatos[15]);
+            this.inicioProdBrazos = Integer.parseInt(listaDatos[17]);
+            this.maxProdBrazos = Integer.parseInt(listaDatos[19]);
+            this.inicioProdPiernas = Integer.parseInt(listaDatos[21]);
+            this.maxProdPiernas = Integer.parseInt(listaDatos[23]);
+            this.inicioProdCuerpos = Integer.parseInt(listaDatos[25]);
+            this.maxProdCuerpos = Integer.parseInt(listaDatos[27]);
+            this.inicioEnsambladores = Integer.parseInt(listaDatos[29]);
+            this.maxEnsambladores = Integer.parseInt(listaDatos[31]);
+            
+            
+            
+        } catch(FileNotFoundException e) {
+            System.out.println("Hubo un error en la lectura");
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aggBotones;
@@ -1053,4 +1118,7 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JPanel panelProd;
     private javax.swing.JPanel panelProd1;
     // End of variables declaration//GEN-END:variables
+
+    
+
 }
