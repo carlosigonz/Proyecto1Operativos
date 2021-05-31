@@ -1,5 +1,6 @@
 package proyectooperativos1gonzalezmicale;
 
+import java.io.IOException;
 import java.util.concurrent.Semaphore;
 
 /**
@@ -21,14 +22,22 @@ public class Main {
         Semaphore mutex = new Semaphore(1);
         Semaphore semCons = new Semaphore(0);
         Semaphore semProd = new Semaphore(6);
+        Interfaz interfaz = new Interfaz();
+        try {
+            interfaz.leerTxt();
+        } catch(IOException e) {
+            System.out.println("Hubo un error");
+        }
+        interfaz.setVisible(true);
         
-        Productor p = new Productor(semCons, semProd, mutex,"Pérez");
-        Ensamblador g = new Ensamblador(semCons, semProd, mutex,"García");
-        Productor b = new Productor(semCons, semProd, mutex, "Baladi");
         
-        p.start();
-        g.start();
-        b.start();
+//        Productor p = new Productor(semCons, semProd, mutex,"Pérez");
+//        Ensamblador g = new Ensamblador(semCons, semProd, mutex,"García");
+//        Productor b = new Productor(semCons, semProd, mutex, "Baladi");
+//        
+//        p.start();
+//        g.start();
+//        b.start();
     }
     
 }
