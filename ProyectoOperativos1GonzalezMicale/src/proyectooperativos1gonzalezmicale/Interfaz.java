@@ -1019,8 +1019,8 @@ public class Interfaz extends javax.swing.JFrame {
     public void leerTxt() throws IOException {
         String path = "test\\datos.txt";
         String linea;
-        String datosTxt = null;
-        String[] listaDatos = null;
+        String datosTxt = "";
+        String[] listaDatos;
         File archivo = new File(path);
         
         try {
@@ -1032,7 +1032,7 @@ public class Interfaz extends javax.swing.JFrame {
                     datosTxt += linea + "\n";
                 }
             }
-            listaDatos = datosTxt.split(":");
+            listaDatos = datosTxt.split(":");            
             this.tiempo = Integer.parseInt(listaDatos[1]);
             this.dias = Integer.parseInt(listaDatos[3]);
             this.maxBtn = Integer.parseInt(listaDatos[5]);
