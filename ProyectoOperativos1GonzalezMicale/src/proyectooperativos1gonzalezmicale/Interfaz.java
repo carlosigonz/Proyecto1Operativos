@@ -72,12 +72,12 @@ public class Interfaz extends javax.swing.JFrame {
     String cuerpoProdName = "cuerpos 1";
     String ensamName = "ensamblador 1";
     //cantidad productores de cada parte
-    Productor[] productoresBtn = new Productor[maxProdBtn];
-    Productor[] productoresBrazos = new Productor[maxProdBrazos];
-    Productor[] productoresPiernas = new Productor[maxProdPiernas];
-    Productor[] productoresCuerpos = new Productor[maxProdCuerpos];
+    Productor[] productoresBtn;
+    Productor[] productoresBrazos;
+    Productor[] productoresPiernas;
+    Productor[] productoresCuerpos;
     //cantidad ensambladores
-    Ensamblador[] ensambladores = new Ensamblador[maxEnsambladores];
+    Ensamblador[] ensambladores;
     
     /**
      * Creates new form Interfaz
@@ -1053,6 +1053,12 @@ public class Interfaz extends javax.swing.JFrame {
             Semaphore semProd = new Semaphore(6);    
             Semaphore semCons = new Semaphore(0);
             Semaphore mutex = new Semaphore(1);
+            
+            this.productoresBtn = new Productor[maxProdBtn];
+            this.productoresBrazos = new Productor[maxProdBrazos];
+            this.productoresPiernas = new Productor[maxProdPiernas];
+            this.productoresCuerpos = new Productor[maxProdCuerpos];
+            this.ensambladores = new Ensamblador[maxEnsambladores];
             
             for (int i = 0; i < maxProdBtn; i++) {
                 String nombre = "botones" + i;
