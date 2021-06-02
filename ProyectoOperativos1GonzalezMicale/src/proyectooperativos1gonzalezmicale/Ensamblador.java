@@ -11,13 +11,13 @@ import java.util.logging.Logger;
  */
 public class Ensamblador extends Thread {
     Semaphore mutex;
-    Semaphore semCons;
+    Semaphore semEnsa;
     Semaphore semProd;
     String name;
 
-    public Ensamblador( Semaphore semCons, Semaphore semProd,Semaphore mutex, String name) {
+    public Ensamblador( Semaphore semEnsa, Semaphore semProd,Semaphore mutex, String name) {
         this.mutex = mutex;
-        this.semCons = semCons;
+        this.semEnsa = semEnsa;
         this.semProd = semProd;
         this.name = name;
     }
@@ -25,10 +25,13 @@ public class Ensamblador extends Thread {
     public void run(){
         while(true){
             try {
-                this.semCons.acquire();
+                this.semEnsa.acquire();
                     this.mutex.acquire();
-                        Main.botones--;
-                        System.out.println("La variable bajó a " + Main.botones + " el hilo " + this.name );
+//                        Main.botones--;
+//                        Main.brazos--;
+//                        Main.piernas--;
+//                        Main.cuerpos--;
+                        System.out.println("La variable bajó a " + " el hilo " + this.name );
                     this.mutex.release();
                 this.semProd.release();
             } catch (InterruptedException ex) {
