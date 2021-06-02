@@ -1056,35 +1056,35 @@ public class Interfaz extends javax.swing.JFrame {
             this.productoresCuerpos = new Productor[maxProdCuerpos];
             this.ensambladores = new Ensamblador[maxEnsambladores];
             
-            semProdBtn = new Semaphore(maxProdBtn);
+            semProdBtn = new Semaphore(maxBtn);
             for (int i = 0; i < maxProdBtn; i++) {
                 String nombre = "botones" + i;
                 Productor prodBtn = new Productor(semEnsaBtn, semProdBtn, mutexBtn,contBotones ,nombre);
                 productoresBtn[i] = prodBtn;
             }
             
-            semProdBrazos = new Semaphore(maxProdBrazos);
+            semProdBrazos = new Semaphore(maxBrazos);
             for (int i = 0; i < maxProdBrazos; i++) {
                 String nombre = "brazos" + i;
                 Productor prodBrazos = new Productor(semEnsaBrazos, semProdBrazos, mutexBrazos,contBrazos ,nombre);
                 productoresBrazos[i] = prodBrazos;
             }
             
-            semProdPiernas = new Semaphore(maxProdPiernas);
+            semProdPiernas = new Semaphore(maxPiernas);
             for (int i = 0; i < maxProdPiernas; i++) {
                 String nombre = "piernas" + i;
                 Productor prodPiernas = new Productor(semEnsaPiernas, semProdPiernas, mutexPiernas,contPiernas ,nombre);
                 productoresPiernas[i] = prodPiernas;
             }
             
-            semProdCuerpos = new Semaphore(maxProdCuerpos);
+            semProdCuerpos = new Semaphore(maxCuerpos);
             for (int i = 0; i < maxProdCuerpos; i++) {
                 String nombre = "cuerpos" + i;
                 Productor prodCuerpos = new Productor(semEnsaCuerpos, semProdCuerpos, mutexCuerpos,contCuerpos ,nombre);
                 productoresCuerpos[i] = prodCuerpos;
             }
             
-            semProdEns = new Semaphore(maxEnsambladores);
+            semProdEns = new Semaphore(99999);
             for (int i = 0; i < maxEnsambladores; i++) {
                 String nombre = "ensamblador" + i;
                 Ensamblador ensamblador = new Ensamblador(semEnsaEns, semProdEns, mutexEns, nombre);
