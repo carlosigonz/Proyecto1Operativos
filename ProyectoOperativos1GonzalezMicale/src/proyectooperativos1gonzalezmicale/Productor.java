@@ -11,13 +11,13 @@ import java.util.logging.Logger;
  */
 public class Productor extends Thread {
     Semaphore mutex;
-    Semaphore semCons;
+    Semaphore semEnsa;
     Semaphore semProd;
     String name;
 
-    public Productor(Semaphore semCons, Semaphore semProd, Semaphore mutex,  String name) {
+    public Productor(Semaphore semEnsa, Semaphore semProd, Semaphore mutex,  String name) {
         this.mutex = mutex;
-        this.semCons = semCons;
+        this.semEnsa = semEnsa;
         this.semProd = semProd;
         this.name = name;
     }
@@ -32,7 +32,7 @@ public class Productor extends Thread {
                         Main.botones++;
                         System.out.println("La variable subió a " + Main.botones + " el hilo " + this.name );
                     this.mutex.release();
-                this.semCons.release();
+                this.semEnsa.release();
             } catch (InterruptedException ex) {
                 Logger.getLogger(Productor.class.getName()).log(Level.SEVERE, null, ex);
             }

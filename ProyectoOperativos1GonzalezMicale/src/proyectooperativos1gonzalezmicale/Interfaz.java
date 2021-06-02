@@ -59,12 +59,12 @@ public class Interfaz extends javax.swing.JFrame {
     //semaforo del ensamblador
     Semaphore semProdEns;
     
-    Semaphore semConsBtn;
-    Semaphore semConsBraz;
-    Semaphore semConsPier;
-    Semaphore semConsCuerpo;
+    Semaphore semEnsaBtn;
+    Semaphore semEnsaBraz;
+    Semaphore semEnsaPier;
+    Semaphore semEnsaCuerpo;
     //semaforo del ensamblador
-    Semaphore semConsEns;
+    Semaphore semEnsaEns;
     //nombre de los productores y ensambladores
     String btnProdName = "boton 1";
     String brazProdName = "brazos 1";
@@ -1051,36 +1051,36 @@ public class Interfaz extends javax.swing.JFrame {
             this.maxEnsambladores = Integer.parseInt(listaDatos[31]);
             
             Semaphore semProd = new Semaphore(6);    
-            Semaphore semCons = new Semaphore(0);
+            Semaphore semEnsa = new Semaphore(0);
             Semaphore mutex = new Semaphore(1);
             
             for (int i = 0; i < maxProdBtn; i++) {
                 String nombre = "botones" + i;
-                Productor prodBtn = new Productor(semCons, semProd, mutex, nombre);
+                Productor prodBtn = new Productor(semEnsa, semProd, mutex, nombre);
                 this.productoresBtn[i] = prodBtn;
             }
             
             for (int i = 0; i < maxProdBrazos; i++) {
                 String nombre = "brazos" + i;
-                Productor prodBrazos = new Productor(semCons, semProd, mutex, nombre);
+                Productor prodBrazos = new Productor(semEnsa, semProd, mutex, nombre);
                 this.productoresBrazos[i] = prodBrazos;
             }
             
             for (int i = 0; i < maxProdPiernas; i++) {
                 String nombre = "piernas" + i;
-                Productor prodPiernas = new Productor(semCons, semProd, mutex, nombre);
+                Productor prodPiernas = new Productor(semEnsa, semProd, mutex, nombre);
                 this.productoresPiernas[i] = prodPiernas;
             }
             
             for (int i = 0; i < maxProdCuerpos; i++) {
                 String nombre = "cuerpos" + i;
-                Productor prodCuerpos = new Productor(semCons, semProd, mutex, nombre);
+                Productor prodCuerpos = new Productor(semEnsa, semProd, mutex, nombre);
                 this.productoresCuerpos[i] = prodCuerpos;
             }
             
             for (int i = 0; i < maxEnsambladores; i++) {
                 String nombre = "ensamblador" + i;
-                Ensamblador ensamblador = new Ensamblador(semCons, semProd, mutex, nombre);
+                Ensamblador ensamblador = new Ensamblador(semEnsa, semProd, mutex, nombre);
                 this.ensambladores[i] = ensamblador;
             }
             
