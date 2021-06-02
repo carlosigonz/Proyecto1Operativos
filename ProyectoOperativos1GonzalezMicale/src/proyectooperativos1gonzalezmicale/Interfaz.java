@@ -19,10 +19,10 @@ public class Interfaz extends javax.swing.JFrame {
     //dias entre despacho
     int dias;
     //contadores de la cantidad de partes
-    int contBotones = 0;
-    int contBrazos = 0;
-    int contPiernas = 0;
-    int contCuerpos = 0;
+    public static volatile int contBotones = 0;
+    public static volatile int contBrazos = 0;
+    public static volatile int contPiernas = 0;
+    public static volatile int contCuerpos = 0;
     //contadores de panas disponibles y panas totales
     int contPanas = 0;
     int contPanasTotales = 0;
@@ -1091,8 +1091,25 @@ public class Interfaz extends javax.swing.JFrame {
                 ensambladores[i] = ensamblador;
             }
             
+            inicializarHilos(inicioProdBtn,productoresBtn);
+            inicializarHilos(inicioProdBrazos,productoresBrazos);
+            inicializarHilos(inicioProdPiernas,productoresPiernas);
+            inicializarHilos(inicioProdCuerpos,productoresCuerpos);
+            inicializarHilos(inicioEnsambladores,ensambladores);
         } catch(FileNotFoundException e) {
             System.out.println("Hubo un error en la lectura");
+        }
+    }
+    
+    public void inicializarHilos(int inicioProd, Productor[] tipo){
+        for (int i = 0; i < inicioProd; i++) {
+            tipo[i].start();
+        }
+    }
+    
+    public void inicializarHilos(int inicioProd, Ensamblador[] tipo){
+        for (int i = 0; i < inicioProd; i++) {
+            tipo[i].start();
         }
     }
 
