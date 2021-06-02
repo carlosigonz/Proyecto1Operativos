@@ -1056,25 +1056,25 @@ public class Interfaz extends javax.swing.JFrame {
             
             for (int i = 0; i < maxProdBtn; i++) {
                 String nombre = "botones" + i;
-                Productor prodBtn = new Productor(semEnsa, semProd, mutex, nombre);
+                Productor prodBtn = new Productor(semEnsa, semProd, mutex,contBotones ,nombre);
                 this.productoresBtn[i] = prodBtn;
             }
             
             for (int i = 0; i < maxProdBrazos; i++) {
                 String nombre = "brazos" + i;
-                Productor prodBrazos = new Productor(semEnsa, semProd, mutex, nombre);
+                Productor prodBrazos = new Productor(semEnsa, semProd, mutex,contBrazos ,nombre);
                 this.productoresBrazos[i] = prodBrazos;
             }
             
             for (int i = 0; i < maxProdPiernas; i++) {
                 String nombre = "piernas" + i;
-                Productor prodPiernas = new Productor(semEnsa, semProd, mutex, nombre);
+                Productor prodPiernas = new Productor(semEnsa, semProd, mutex,contPiernas ,nombre);
                 this.productoresPiernas[i] = prodPiernas;
             }
             
             for (int i = 0; i < maxProdCuerpos; i++) {
                 String nombre = "cuerpos" + i;
-                Productor prodCuerpos = new Productor(semEnsa, semProd, mutex, nombre);
+                Productor prodCuerpos = new Productor(semEnsa, semProd, mutex,contCuerpos ,nombre);
                 this.productoresCuerpos[i] = prodCuerpos;
             }
             

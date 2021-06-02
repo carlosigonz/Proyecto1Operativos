@@ -14,12 +14,14 @@ public class Productor extends Thread {
     Semaphore semEnsa;
     Semaphore semProd;
     String name;
+    int especialidad;
 
-    public Productor(Semaphore semEnsa, Semaphore semProd, Semaphore mutex,  String name) {
+    public Productor(Semaphore semEnsa, Semaphore semProd, Semaphore mutex,int especialidad  ,String name) {
         this.mutex = mutex;
         this.semEnsa = semEnsa;
         this.semProd = semProd;
         this.name = name;
+        this.especialidad = especialidad;
     }
 
     
@@ -29,7 +31,7 @@ public class Productor extends Thread {
             try {
                 this.semProd.acquire();
                     this.mutex.acquire();
-                        Main.botones++;
+                        especialidad++;
                         System.out.println("La variable subió a " + Main.botones + " el hilo " + this.name );
                     this.mutex.release();
                 this.semEnsa.release();
