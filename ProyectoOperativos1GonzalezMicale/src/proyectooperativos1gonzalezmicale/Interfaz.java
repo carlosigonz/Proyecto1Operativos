@@ -57,12 +57,13 @@ public class Interfaz extends javax.swing.JFrame {
     Semaphore semProdPiernas;
     Semaphore semProdCuerpos;
     //semaforo del ensamblador
-    Semaphore semProdEns;
+    Semaphore semProdEns = new Semaphore(99999);
     
-    Semaphore semEnsaBtn = new Semaphore(0);
-    Semaphore semEnsaBrazos = new Semaphore(0);
-    Semaphore semEnsaPiernas = new Semaphore(0);
-    Semaphore semEnsaCuerpos = new Semaphore(0);
+    //Estos valores van asi aqui???
+    Semaphore semEnsaBtn = new Semaphore(8);
+    Semaphore semEnsaBrazos = new Semaphore(2);
+    Semaphore semEnsaPiernas = new Semaphore(2);
+    Semaphore semEnsaCuerpos = new Semaphore(1);
     //semaforo del ensamblador
     Semaphore semEnsaEns = new Semaphore(0);
     //nombre de los productores y ensambladores
@@ -1084,10 +1085,14 @@ public class Interfaz extends javax.swing.JFrame {
                 productoresCuerpos[i] = prodCuerpos;
             }
             
-            semProdEns = new Semaphore(99999);
             for (int i = 0; i < maxEnsambladores; i++) {
                 String nombre = "ensamblador" + i;
                 Ensamblador ensamblador = new Ensamblador(semEnsaEns, semProdEns, mutexEns, nombre);
+                ensamblador.botones = contBotones;
+                ensamblador.brazos = contBrazos;
+                ensamblador.piernas = contPiernas;
+                ensamblador.cuerpos = contCuerpos;
+                ensamblador.panas = contPanas;
                 ensambladores[i] = ensamblador;
             }
             
