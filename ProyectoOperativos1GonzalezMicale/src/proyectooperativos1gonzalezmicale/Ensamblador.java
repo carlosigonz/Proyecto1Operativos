@@ -27,11 +27,11 @@ public class Ensamblador extends Thread {
             try {
                 this.semEnsa.acquire();
                     this.mutex.acquire();
-                        Main.botones--;
-                        Main.brazos--;
-                        Main.piernas--;
-                        Main.cuerpos--;
-                        System.out.println("La variable bajó a " + Main.botones + " el hilo " + this.name );
+//                        Main.botones--;
+//                        Main.brazos--;
+//                        Main.piernas--;
+//                        Main.cuerpos--;
+                        System.out.println("La variable bajó a " + " el hilo " + this.name );
                     this.mutex.release();
                 this.semProd.release();
             } catch (InterruptedException ex) {

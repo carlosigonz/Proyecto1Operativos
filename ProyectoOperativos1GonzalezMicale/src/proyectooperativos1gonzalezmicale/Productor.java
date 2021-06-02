@@ -32,7 +32,7 @@ public class Productor extends Thread {
                 this.semProd.acquire();
                     this.mutex.acquire();
                         especialidad++;
-                        System.out.println("La variable subió a " + Main.botones + " el hilo " + this.name );
+                        System.out.println("La variable subió a " + especialidad + " el hilo " + this.name );
                     this.mutex.release();
                 this.semEnsa.release();
             } catch (InterruptedException ex) {
