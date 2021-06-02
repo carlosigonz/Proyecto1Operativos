@@ -19,15 +19,19 @@ public class Main {
     
     
     public static void main(String[] args) {
-        Semaphore mutex = new Semaphore(1);
-        Semaphore semEnsa = new Semaphore(0);
-        Semaphore semProd = new Semaphore(6);
         Interfaz interfaz = new Interfaz();
         try {
             interfaz.leerTxt();
         } catch(IOException e) {
             System.out.println("Hubo un error");
         }
+        Semaphore mutex = new Semaphore(1);
+        Semaphore semEnsa = new Semaphore(0);
+        Semaphore semBotones = new Semaphore(interfaz.maxBtn);
+        Semaphore semBrazos = new Semaphore(interfaz.maxBrazos);
+        Semaphore semPiernas = new Semaphore(interfaz.maxPiernas);
+        Semaphore semCuerpos = new Semaphore(interfaz.maxCuerpos);
+        
         interfaz.setVisible(true);
         
         
