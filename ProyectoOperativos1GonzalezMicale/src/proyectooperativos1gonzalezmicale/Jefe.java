@@ -18,14 +18,12 @@ public class Jefe extends Thread {
     Semaphore semActivo;
     Semaphore semDormido;
     int tiempo;
-    int dias;
     
-    public Jefe(Semaphore mutex, Semaphore semActivo, Semaphore semDormido, int tiempo, int dias) {
+    public Jefe(Semaphore mutex, Semaphore semActivo, Semaphore semDormido, int tiempo) {
         this.mutex = mutex;
         this.semActivo = semActivo;
         this.semDormido = semDormido;
         this.tiempo = tiempo;
-        this.dias = dias;
     }
     
     public void run() {
