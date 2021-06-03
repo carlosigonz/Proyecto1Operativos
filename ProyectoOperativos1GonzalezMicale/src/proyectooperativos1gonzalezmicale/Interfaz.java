@@ -79,6 +79,12 @@ public class Interfaz extends javax.swing.JFrame {
     Productor[] productoresCuerpos;
     //cantidad ensambladores
     Ensamblador[] ensambladores;
+    //Jefe y Gerente
+    Semaphore semActivo;
+    Semaphore semDormido;
+    Semaphore mutex;
+    Jefe jefe;
+    Gerente gerente;
     
     /**
      * Creates new form Interfaz
@@ -1114,6 +1120,16 @@ public class Interfaz extends javax.swing.JFrame {
                 ensamblador.panas = contPanas;
                 ensambladores[i] = ensamblador;
             }
+            
+            semActivo = new Semaphore(dias);
+            semDormido = new Semaphore(0);
+            mutex = new Semaphore(1);
+            
+            jefe = new Jefe(mutex, semActivo, semDormido, tiempo);
+            gerente = new Gerente(mutex, semActivo, semDormido, tiempo, dias);
+            
+            jefe.start();
+            gerente.start();
             
             //Se inicializan los hilos.
             inicializarHilos(inicioProdBtn,productoresBtn);
