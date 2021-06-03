@@ -32,7 +32,7 @@ public class Gerente extends Thread {
     public void run() {
         while(true) {
             try {
-                this.semActivo.acquire();
+                this.semDormido.acquire();
                 this.mutex.acquire();
                 
                 this.status = true;
@@ -52,7 +52,7 @@ public class Gerente extends Thread {
                 
                 
                 this.mutex.release();
-                this.semDormido.release();
+                this.semActivo.release();
                 
             } catch(InterruptedException ex) {
                 Logger.getLogger(Productor.class.getName()).log(Level.SEVERE, null, ex);

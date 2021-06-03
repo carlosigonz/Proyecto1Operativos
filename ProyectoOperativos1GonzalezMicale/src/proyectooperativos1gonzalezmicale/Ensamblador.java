@@ -15,8 +15,6 @@ public class Ensamblador extends Thread {
     Semaphore semEnsa;
     Semaphore semProd;
     String name;
-    int botones = Interfaz.contBotones,brazos = Interfaz.contBrazos,
-            piernas= Interfaz.contPiernas,cuerpos= Interfaz.contCuerpos,panas= Interfaz.contPanas;
     Semaphore semEnsaBtn = new Semaphore(8);
     Semaphore semEnsaBrazos = new Semaphore(2);
     Semaphore semEnsaPiernas = new Semaphore(2);
@@ -40,18 +38,18 @@ public class Ensamblador extends Thread {
     public void run(){
         while(true){
             try {
-                if(botones>=8&&brazos>=2&&piernas>=2&&cuerpos>=1){
-                this.semEnsa.acquire();
-                    this.mutex.acquire();
-                       botones = botones - 8;
-                       brazos = brazos - 2;
-                       piernas = piernas - 2;
-                       cuerpos = cuerpos - 1;
-                        panas++;
-                        System.out.println("La variable pana subio a "+ panas + " el hilo " + this.name );
-                        Thread.sleep(1000);
-                    this.mutex.release();
-                this.semProd.release();
+                if(Interfaz.contBotones >= 8 && Interfaz.contBrazos >= 2 && Interfaz.contPiernas >= 2 && Interfaz.contCuerpos >= 1){
+                    this.semEnsa.acquire();
+                        this.mutex.acquire();
+                            Interfaz.contBotones = Interfaz.contBotones - 8;
+                            Interfaz.contBrazos = Interfaz.contBrazos - 2;
+                            Interfaz.contPiernas = Interfaz.contPiernas - 2;
+                            Interfaz.contCuerpos = Interfaz.contCuerpos - 1;
+                            Interfaz.contPanas++;
+                            System.out.println("La variable pana subio a "+ Interfaz.contPanas + " el hilo " + this.name );
+                            Thread.sleep(1000);
+                        this.mutex.release();
+                    this.semProd.release();
                 }
             } catch (InterruptedException ex) {
                 Logger.getLogger(Productor.class.getName()).log(Level.SEVERE, null, ex);

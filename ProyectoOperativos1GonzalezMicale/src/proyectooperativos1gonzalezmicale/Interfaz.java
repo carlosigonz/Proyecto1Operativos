@@ -66,12 +66,6 @@ public class Interfaz extends javax.swing.JFrame {
     Semaphore semEnsaCuerpos = new Semaphore(1);
     //semaforo del ensamblador
     Semaphore semEnsaEns = new Semaphore(0);
-    //nombre de los productores y ensambladores
-    String btnProdName = "boton 1";
-    String brazProdName = "brazos 1";
-    String pierProdName = "piernas 1";
-    String cuerpoProdName = "cuerpos 1";
-    String ensamName = "ensamblador 1";
     //cantidad productores de cada parte
     Productor[] productoresBtn;
     Productor[] productoresBrazos;
@@ -1114,16 +1108,13 @@ public class Interfaz extends javax.swing.JFrame {
             for (int i = 0; i < maxEnsambladores; i++) {
                 String nombre = "ensamblador" + i;
                 Ensamblador ensamblador = new Ensamblador(semEnsaEns, semProdEns, mutexEns, nombre);
-                ensamblador.botones = contBotones;
-                ensamblador.brazos = contBrazos;
-                ensamblador.piernas = contPiernas;
-                ensamblador.cuerpos = contCuerpos;
-                ensamblador.panas = contPanas;
                 ensambladores[i] = ensamblador;
             }
             
-            semActivo = new Semaphore(dias);
-            semDormido = new Semaphore(0);
+            int diasTotales = dias;
+            
+            semActivo = new Semaphore(diasTotales);
+            semDormido = new Semaphore(diasTotales);
             mutex = new Semaphore(1);
             
             jefe = new Jefe(mutex, semActivo, semDormido, tiempo);
@@ -1226,13 +1217,13 @@ public class Interfaz extends javax.swing.JFrame {
         labelCuerpoProd.setText("Cuerpos: " + hilosActivos(productoresCuerpos));
         labelCtdEnsam.setText("Ensambladores: " + hilosActivos(ensambladores));
         diasRestLabel.setText("Dias restantes: " + dias);
-        if(Jefe.status) {
+        if(jefe.status) {
             jefeLabel.setText("Jefe: Despierto");
         } else {
             jefeLabel.setText("Jefe: Dormido");
         }
         
-        if(Gerente.status) {
+        if(gerente.status) {
             gerenteLabel.setText("Gerente: Despierto");
         } else {
             gerenteLabel.setText("Gerente: Dormido");
