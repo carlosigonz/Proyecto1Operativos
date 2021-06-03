@@ -44,7 +44,7 @@ public class Productor extends Thread {
                         this.semEnsa.acquire();
                         this.mutex.acquire();
                         Interfaz.contBotones = Interfaz.contBotones + 1;
-                        System.out.println("La variable subió a " + interfaz.contBotones + " el hilo " + this.name );
+//                        System.out.println("La variable subió a " + interfaz.contBotones + " el hilo " + this.name );
                         Thread.sleep(2000);
                         this.mutex.release();
                         this.semEnsa.release();
@@ -54,7 +54,7 @@ public class Productor extends Thread {
                         this.semEnsa.acquire();
                         this.mutex.acquire();
                         Interfaz.contBrazos = Interfaz.contBrazos + 1;
-                        System.out.println("La variable subió a " + interfaz.contBrazos + " el hilo " + this.name );
+//                        System.out.println("La variable subió a " + interfaz.contBrazos + " el hilo " + this.name );
                         Thread.sleep(2000);
                         this.mutex.release();
                         this.semEnsa.release();
@@ -64,7 +64,7 @@ public class Productor extends Thread {
                         this.semEnsa.acquire();
                         this.mutex.acquire();
                         Interfaz.contPiernas = Interfaz.contPiernas + 1;
-                        System.out.println("La variable subió a " + interfaz.contPiernas + " el hilo " + this.name );
+//                        System.out.println("La variable subió a " + interfaz.contPiernas + " el hilo " + this.name );
                         Thread.sleep(2000);
                         this.mutex.release();
                         this.semEnsa.release();
@@ -74,7 +74,7 @@ public class Productor extends Thread {
                         this.semEnsa.acquire();
                         this.mutex.acquire();
                         Interfaz.contCuerpos = Interfaz.contCuerpos + 1;
-                        System.out.println("La variable subió a " + interfaz.contCuerpos + " el hilo " + this.name );
+//                        System.out.println("La variable subió a " + interfaz.contCuerpos + " el hilo " + this.name );
                         Thread.sleep(2000);
                         this.mutex.release();
                         this.semEnsa.release();

@@ -15,7 +15,8 @@ public class Ensamblador extends Thread {
     Semaphore semEnsa;
     Semaphore semProd;
     String name;
-    int botones,brazos,piernas,cuerpos,panas;
+    int botones = Interfaz.contBotones,brazos = Interfaz.contBrazos,
+            piernas= Interfaz.contPiernas,cuerpos= Interfaz.contCuerpos,panas= Interfaz.contPanas;
     Semaphore semEnsaBtn = new Semaphore(8);
     Semaphore semEnsaBrazos = new Semaphore(2);
     Semaphore semEnsaPiernas = new Semaphore(2);

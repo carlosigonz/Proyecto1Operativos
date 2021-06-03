@@ -1189,8 +1189,16 @@ public class Interfaz extends javax.swing.JFrame {
         }
     }
     
+    /**
+     *Actualiza los contadores de los productos en la consola y en la interfaz.
+     */
     public void actualizarContadores(){
-        
+        System.out.println("Botones:" + contBotones + " Brazos:" + contBrazos +
+        " Piernas:" + contPiernas + " Cuerpos:" + contCuerpos + " Panas:" + contPanas);
+        ctdBtns.setText("Botones: " + contBotones);
+        ctdBrazos.setText("Botones: " + contBrazos);
+        ctdPiernas.setText("Botones: " + contPiernas);
+        ctdCuerpos.setText("Botones: " + contCuerpos);
     }
       
 
