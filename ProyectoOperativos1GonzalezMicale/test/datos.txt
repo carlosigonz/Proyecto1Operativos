@@ -1,4 +1,4 @@
-tiempo:1000:
+tiempo:10000:
 dias:30:
 botones:60:
 brazos:40:
