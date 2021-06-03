@@ -45,6 +45,7 @@ public class Productor extends Thread {
                         Thread.sleep(2000);
                     this.mutex.release();
                 this.semEnsa.release();
+                this.semProd.release();
             } catch (InterruptedException ex) {
                 Logger.getLogger(Productor.class.getName()).log(Level.SEVERE, null, ex);
             }
