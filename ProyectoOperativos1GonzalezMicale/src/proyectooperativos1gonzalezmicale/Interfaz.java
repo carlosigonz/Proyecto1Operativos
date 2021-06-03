@@ -10,8 +10,8 @@ import java.util.concurrent.Semaphore;
 
 /**
  *
- * @author Carlos Gonzales
- * Ricardo Micale
+ * @author Carlos Gonzalez CI: 26.996.222, 
+ * Ricardo Micale CI: 27.111.658
  */
 public class Interfaz extends javax.swing.JFrame {
     //tiempo de un dia
@@ -19,10 +19,10 @@ public class Interfaz extends javax.swing.JFrame {
     //dias entre despacho
     int dias;
     //contadores de la cantidad de partes
-    int contBotones = 0;
-    int contBrazos = 0;
-    int contPiernas = 0;
-    int contCuerpos = 0;
+    public static volatile int contBotones = 0;
+    public static volatile int contBrazos = 0;
+    public static volatile int contPiernas = 0;
+    public static volatile int contCuerpos = 0;
     //contadores de panas disponibles y panas totales
     int contPanas = 0;
     int contPanasTotales = 0;
@@ -57,12 +57,13 @@ public class Interfaz extends javax.swing.JFrame {
     Semaphore semProdPiernas;
     Semaphore semProdCuerpos;
     //semaforo del ensamblador
-    Semaphore semProdEns;
+    Semaphore semProdEns = new Semaphore(99999);
     
-    Semaphore semEnsaBtn = new Semaphore(0);
-    Semaphore semEnsaBrazos = new Semaphore(0);
-    Semaphore semEnsaPiernas = new Semaphore(0);
-    Semaphore semEnsaCuerpos = new Semaphore(0);
+    //Estos valores van asi aqui???
+    Semaphore semEnsaBtn = new Semaphore(8);
+    Semaphore semEnsaBrazos = new Semaphore(2);
+    Semaphore semEnsaPiernas = new Semaphore(2);
+    Semaphore semEnsaCuerpos = new Semaphore(1);
     //semaforo del ensamblador
     Semaphore semEnsaEns = new Semaphore(0);
     //nombre de los productores y ensambladores
@@ -453,6 +454,11 @@ public class Interfaz extends javax.swing.JFrame {
         aggBotones.setBorderPainted(false);
         aggBotones.setContentAreaFilled(false);
         aggBotones.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        aggBotones.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                aggBotonesMouseClicked(evt);
+            }
+        });
         aggBotones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 aggBotonesActionPerformed(evt);
@@ -645,10 +651,10 @@ public class Interfaz extends javax.swing.JFrame {
         panelProd.setLayout(panelProdLayout);
         panelProdLayout.setHorizontalGroup(
             panelProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
-            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
-            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
+            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE)
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE)
+            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE)
         );
         panelProdLayout.setVerticalGroup(
             panelProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -826,7 +832,7 @@ public class Interfaz extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 713, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 749, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -844,7 +850,7 @@ public class Interfaz extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(panelProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(panelProd, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE))
                             .addComponent(diasRestLabel)
                             .addComponent(jefeLabel)
                             .addComponent(gerenteLabel))
@@ -921,19 +927,23 @@ public class Interfaz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void aggBotonesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aggBotonesActionPerformed
-        // TODO add your handling code here:
+        agregarHilos(inicioProdBtn,productoresBtn);
+        System.out.println("Agregado productor boton");
     }//GEN-LAST:event_aggBotonesActionPerformed
 
     private void aggBrazosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aggBrazosActionPerformed
-        // TODO add your handling code here:
+        agregarHilos(inicioProdBrazos,productoresBrazos);
+        System.out.println("Agregado productor brazos");
     }//GEN-LAST:event_aggBrazosActionPerformed
 
     private void aggPiernasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aggPiernasActionPerformed
-        // TODO add your handling code here:
+        agregarHilos(inicioProdPiernas,productoresPiernas);
+        System.out.println("Agregado productor piernas");
     }//GEN-LAST:event_aggPiernasActionPerformed
 
     private void aggCuerpoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aggCuerpoActionPerformed
-        // TODO add your handling code here:
+        agregarHilos(inicioProdBtn,productoresCuerpos);
+        System.out.println("Agregado productor cuerpos");
     }//GEN-LAST:event_aggCuerpoActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
@@ -978,8 +988,13 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_delEnsambladorActionPerformed
 
     private void aggEnsambladorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aggEnsambladorActionPerformed
-        // TODO add your handling code here:
+        agregarHilos(inicioEnsambladores,ensambladores);
+        System.out.println("Agregado productor boton");
     }//GEN-LAST:event_aggEnsambladorActionPerformed
+
+    private void aggBotonesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aggBotonesMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_aggBotonesMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1023,6 +1038,7 @@ public class Interfaz extends javax.swing.JFrame {
         String[] listaDatos;
         File archivo = new File(path);
         
+        //Se obtienen los datos del archivo txt para iniciar el programa.
         try {
             FileReader fr = new FileReader(archivo);
             BufferedReader br = new BufferedReader(fr);
@@ -1032,6 +1048,8 @@ public class Interfaz extends javax.swing.JFrame {
                     datosTxt += linea + "\n";
                 }
             }
+            
+            //Se asignan los valores adecuados a cada parametro.
             listaDatos = datosTxt.split(":");            
             this.tiempo = Integer.parseInt(listaDatos[1]);
             this.dias = Integer.parseInt(listaDatos[3]);
@@ -1050,12 +1068,14 @@ public class Interfaz extends javax.swing.JFrame {
             this.inicioEnsambladores = Integer.parseInt(listaDatos[29]);
             this.maxEnsambladores = Integer.parseInt(listaDatos[31]);
             
+            //Se inicializan los espacios donde estaran la máxima cantidad de productores
             this.productoresBtn = new Productor[maxProdBtn];
             this.productoresBrazos = new Productor[maxProdBrazos];
             this.productoresPiernas = new Productor[maxProdPiernas];
             this.productoresCuerpos = new Productor[maxProdCuerpos];
             this.ensambladores = new Ensamblador[maxEnsambladores];
             
+            //Se asignan las cantidadades máximas de producción y se coloca la máxima cantidad de hilos por productor
             semProdBtn = new Semaphore(maxBtn);
             for (int i = 0; i < maxProdBtn; i++) {
                 String nombre = "botones" + i;
@@ -1084,17 +1104,72 @@ public class Interfaz extends javax.swing.JFrame {
                 productoresCuerpos[i] = prodCuerpos;
             }
             
-            semProdEns = new Semaphore(99999);
             for (int i = 0; i < maxEnsambladores; i++) {
                 String nombre = "ensamblador" + i;
                 Ensamblador ensamblador = new Ensamblador(semEnsaEns, semProdEns, mutexEns, nombre);
+                ensamblador.botones = contBotones;
+                ensamblador.brazos = contBrazos;
+                ensamblador.piernas = contPiernas;
+                ensamblador.cuerpos = contCuerpos;
+                ensamblador.panas = contPanas;
                 ensambladores[i] = ensamblador;
             }
             
+            //Se inicializan los hilos.
+            inicializarHilos(inicioProdBtn,productoresBtn);
+            inicializarHilos(inicioProdBrazos,productoresBrazos);
+            inicializarHilos(inicioProdPiernas,productoresPiernas);
+            inicializarHilos(inicioProdCuerpos,productoresCuerpos);
+            inicializarHilos(inicioEnsambladores,ensambladores);
         } catch(FileNotFoundException e) {
             System.out.println("Hubo un error en la lectura");
         }
     }
+    
+    /**
+     *Se le indica al numero de hilos a correr.
+     * @param inicioProd
+     * Número minimo de hilos que deben comenzar en la producción.
+     * @param tipo
+     * El array de hilos de productores que se quiere comenzar.
+     */
+    public void inicializarHilos(int inicioProd, Productor[] tipo){
+        for (int i = 0; i < inicioProd; i++) {
+            tipo[i].start();
+        }
+    }
+    
+    public void inicializarHilos(int inicioProd, Ensamblador[] tipo){
+        for (int i = 0; i < inicioProd; i++) {
+            tipo[i].start();
+        }
+    }
+    
+    /**
+     *Se indica iniciar o resumir al siguiente hilo disponible en el array.
+     * @param inicioProd
+     * Maximo numero de hilos.
+     * @param tipo
+     * El array de hilos donde se quieren inicializar.
+     */
+    public void agregarHilos(int inicioProd,Productor[] tipo){
+        for (int i = 0; i < inicioProd; i++) {
+            if(!tipo[i].isAlive()){
+                tipo[i].start();
+                break;
+            }
+        }
+    }
+    
+    public void agregarHilos(int inicioProd, Ensamblador[] tipo){
+        for (int i = 0; i < inicioProd; i++) {
+            if(!tipo[i].isAlive()){
+                tipo[i].start();
+                break;
+            }
+        }
+    }
+      
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aggBotones;

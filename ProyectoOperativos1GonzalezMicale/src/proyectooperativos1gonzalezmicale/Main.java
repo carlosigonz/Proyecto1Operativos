@@ -10,11 +10,7 @@ import java.util.concurrent.Semaphore;
  */
 public class Main {
     
-//    public static volatile int botones = 0;
-//    public static volatile int brazos = 0;
-//    public static volatile int piernas = 0;
-//    public static volatile int cuerpos = 0;
-//    public static volatile int panas = 0;
+
     
     
     public static void main(String[] args) {
@@ -25,7 +21,14 @@ public class Main {
             System.out.println("Hubo un error");
         }
         interfaz.setVisible(true);
-//        //Semaforo Mutex. Permite la entrada de un hilo a la vez
+    }
+//    public static volatile int botones = 0;
+//    public static volatile int brazos = 0;
+//    public static volatile int piernas = 0;
+//    public static volatile int cuerpos = 0;
+//    public static volatile int panas = 0;
+    
+    //        //Semaforo Mutex. Permite la entrada de un hilo a la vez
 //        Semaphore mutex = new Semaphore(1);
 //        //Semaforo Ensamblador. Evita que el hilo ensamblador progrese sin 
 //        Semaphore semEnsa = new Semaphore(0);
@@ -74,6 +77,5 @@ public class Main {
 //        p.start();
 //        g.start();
 //        b.start();
-    }
     
 }

@@ -7,14 +7,28 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author carlo
+ * @author Carlos Gonzalez CI: 26.996.222, 
+ * Ricardo Micale CI: 27.111.658
  */
 public class Ensamblador extends Thread {
     Semaphore mutex;
     Semaphore semEnsa;
     Semaphore semProd;
     String name;
+    int botones,brazos,piernas,cuerpos,panas;
+    Semaphore semEnsaBtn = new Semaphore(8);
+    Semaphore semEnsaBrazos = new Semaphore(2);
+    Semaphore semEnsaPiernas = new Semaphore(2);
+    Semaphore semEnsaCuerpos = new Semaphore(1);
 
+    /**
+     *Se crea un hilo ensamblador que remueve elementos a los objetos seleccionados.
+     * 
+     * @param semEnsa
+     * @param semProd
+     * @param mutex
+     * @param name
+     */
     public Ensamblador( Semaphore semEnsa, Semaphore semProd,Semaphore mutex, String name) {
         this.mutex = mutex;
         this.semEnsa = semEnsa;
@@ -25,13 +39,19 @@ public class Ensamblador extends Thread {
     public void run(){
         while(true){
             try {
+                semEnsaBtn.acquire();
+                semEnsaBrazos.acquire();
+                semEnsaPiernas.acquire();
+                semEnsaCuerpos.acquire();
                 this.semEnsa.acquire();
                     this.mutex.acquire();
-//                        Main.botones--;
-//                        Main.brazos--;
-//                        Main.piernas--;
-//                        Main.cuerpos--;
-                        System.out.println("La variable bajó a " + " el hilo " + this.name );
+                       botones--;
+                        brazos--;
+                        piernas--;
+                        cuerpos--;
+                        panas++;
+                        System.out.println("La variable pana subio a "+ panas + " el hilo " + this.name );
+                        Thread.sleep(1000);
                     this.mutex.release();
                 this.semProd.release();
             } catch (InterruptedException ex) {
