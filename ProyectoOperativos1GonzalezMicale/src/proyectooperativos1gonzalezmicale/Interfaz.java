@@ -16,16 +16,16 @@ import java.util.concurrent.Semaphore;
 public class Interfaz extends javax.swing.JFrame {
     //tiempo de un dia
     int tiempo;
-    //dias entre despacho
-    int dias;
+    //dias entre despachos
+    public static volatile int dias;
     //contadores de la cantidad de partes
     public static volatile int contBotones = 0;
     public static volatile int contBrazos = 0;
     public static volatile int contPiernas = 0;
     public static volatile int contCuerpos = 0;
     //contadores de panas disponibles y panas totales
-    int contPanas = 0;
-    int contPanasTotales = 0;
+    public static volatile int contPanas = 0;
+    public static volatile int contPanasTotales = 0;
     //cantidades iniciales de productores
     int inicioProdBtn = 0;
     int inicioProdBrazos = 0;
