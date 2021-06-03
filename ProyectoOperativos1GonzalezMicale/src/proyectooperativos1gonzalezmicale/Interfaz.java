@@ -1225,6 +1225,18 @@ public class Interfaz extends javax.swing.JFrame {
         labelPiernasProd.setText("Piernas: " + hilosActivos(productoresPiernas));
         labelCuerpoProd.setText("Cuerpos: " + hilosActivos(productoresCuerpos));
         labelCtdEnsam.setText("Ensambladores: " + hilosActivos(ensambladores));
+        diasRestLabel.setText("Dias restantes: " + dias);
+        if(Jefe.status) {
+            jefeLabel.setText("Jefe: Despierto");
+        } else {
+            jefeLabel.setText("Jefe: Dormido");
+        }
+        
+        if(Gerente.status) {
+            gerenteLabel.setText("Gerente: Despierto");
+        } else {
+            gerenteLabel.setText("Gerente: Dormido");
+        }
 
     }
       
