@@ -454,6 +454,11 @@ public class Interfaz extends javax.swing.JFrame {
         aggBotones.setBorderPainted(false);
         aggBotones.setContentAreaFilled(false);
         aggBotones.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        aggBotones.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                aggBotonesMouseClicked(evt);
+            }
+        });
         aggBotones.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 aggBotonesActionPerformed(evt);
@@ -646,10 +651,10 @@ public class Interfaz extends javax.swing.JFrame {
         panelProd.setLayout(panelProdLayout);
         panelProdLayout.setHorizontalGroup(
             panelProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
-            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
-            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)
+            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE)
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE)
+            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE)
         );
         panelProdLayout.setVerticalGroup(
             panelProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -827,7 +832,7 @@ public class Interfaz extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 713, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 749, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -845,7 +850,7 @@ public class Interfaz extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(panelProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(panelProd, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE))
                             .addComponent(diasRestLabel)
                             .addComponent(jefeLabel)
                             .addComponent(gerenteLabel))
@@ -922,19 +927,23 @@ public class Interfaz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void aggBotonesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aggBotonesActionPerformed
-        // TODO add your handling code here:
+        agregarHilos(inicioProdBtn,productoresBtn);
+        System.out.println("Agregado productor boton");
     }//GEN-LAST:event_aggBotonesActionPerformed
 
     private void aggBrazosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aggBrazosActionPerformed
-        // TODO add your handling code here:
+        agregarHilos(inicioProdBrazos,productoresBrazos);
+        System.out.println("Agregado productor brazos");
     }//GEN-LAST:event_aggBrazosActionPerformed
 
     private void aggPiernasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aggPiernasActionPerformed
-        // TODO add your handling code here:
+        agregarHilos(inicioProdPiernas,productoresPiernas);
+        System.out.println("Agregado productor piernas");
     }//GEN-LAST:event_aggPiernasActionPerformed
 
     private void aggCuerpoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aggCuerpoActionPerformed
-        // TODO add your handling code here:
+        agregarHilos(inicioProdBtn,productoresCuerpos);
+        System.out.println("Agregado productor cuerpos");
     }//GEN-LAST:event_aggCuerpoActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
@@ -979,8 +988,13 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_delEnsambladorActionPerformed
 
     private void aggEnsambladorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aggEnsambladorActionPerformed
-        // TODO add your handling code here:
+        agregarHilos(inicioEnsambladores,ensambladores);
+        System.out.println("Agregado productor boton");
     }//GEN-LAST:event_aggEnsambladorActionPerformed
+
+    private void aggBotonesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aggBotonesMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_aggBotonesMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1117,6 +1131,25 @@ public class Interfaz extends javax.swing.JFrame {
             tipo[i].start();
         }
     }
+    
+    public void agregarHilos(int inicioProd,Productor[] tipo){
+        for (int i = 0; i < inicioProd; i++) {
+            if(!tipo[i].isAlive()){
+                tipo[i].start();
+                break;
+            }
+        }
+    }
+    
+    public void agregarHilos(int inicioProd, Ensamblador[] tipo){
+        for (int i = 0; i < inicioProd; i++) {
+            if(!tipo[i].isAlive()){
+                tipo[i].start();
+                break;
+            }
+        }
+    }
+      
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton aggBotones;
