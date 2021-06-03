@@ -15,7 +15,7 @@ import java.util.concurrent.Semaphore;
  */
 public class Interfaz extends javax.swing.JFrame {
     //tiempo de un dia
-    int tiempo;
+    public static volatile int tiempo;
     //dias entre despachos
     public static volatile int dias;
     //contadores de la cantidad de partes
@@ -1225,7 +1225,7 @@ public class Interfaz extends javax.swing.JFrame {
         labelPiernasProd.setText("Piernas: " + hilosActivos(productoresPiernas));
         labelCuerpoProd.setText("Cuerpos: " + hilosActivos(productoresCuerpos));
         labelCtdEnsam.setText("Ensambladores: " + hilosActivos(ensambladores));
-        
+
     }
       
 
