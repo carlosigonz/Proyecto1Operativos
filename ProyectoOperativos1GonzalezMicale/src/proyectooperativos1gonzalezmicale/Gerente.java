@@ -19,6 +19,7 @@ public class Gerente extends Thread {
     Semaphore semDormido;
     int tiempo;
     int dias;
+    public static volatile boolean status;
     
     public Gerente(Semaphore mutex, Semaphore semActivo, Semaphore semDormido, int tiempo, int dias) {
         this.mutex = mutex;
@@ -31,17 +32,25 @@ public class Gerente extends Thread {
     public void run() {
         while(true) {
             try {
-                if(Interfaz.dias == 0) {
-                    System.out.println("Gerente Despierto");
-                    TimeUnit.SECONDS.sleep(tiempo/3);
-
-                    System.out.println("Gerente dormido");
-                    TimeUnit.SECONDS.sleep((2*tiempo)/3);
-                    
+                this.semActivo.acquire();
+                this.mutex.acquire();
+                
+                System.out.println("Gerente Despierto");
+                Thread.sleep(tiempo/3);
+                this.status = true;
+                
+                if(Interfaz.dias == 0 && !Jefe.status) {
                     Interfaz.dias = dias;
                     Interfaz.contPanasTotales += Interfaz.contPanas;
                     Interfaz.contPanas = 0;
                 }
+                
+                System.out.println("Gerente dormido");
+                Thread.sleep((2*tiempo)/3);
+                this.status = false;
+                
+                this.mutex.release();
+                this.semDormido.release();
                 
             } catch(InterruptedException ex) {
                 Logger.getLogger(Productor.class.getName()).log(Level.SEVERE, null, ex);
