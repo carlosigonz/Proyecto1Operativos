@@ -1189,6 +1189,27 @@ public class Interfaz extends javax.swing.JFrame {
         }
     }
     
+    
+    public int hilosActivos(Productor[] tipo){
+        int aux=0;
+        for (Productor tipo1 : tipo) {
+            if (tipo1.isAlive()) {
+                aux++;
+            }
+        }
+        return aux;
+    }
+    
+    public int hilosActivos(Ensamblador[] tipo){
+        int aux=0;
+        for (Ensamblador tipo1 : tipo) {
+            if (tipo1.isAlive()) {
+                aux++;
+            }
+        }
+        return aux;
+    }
+    
     /**
      *Actualiza los contadores de los productos en la consola y en la interfaz.
      */
@@ -1199,6 +1220,12 @@ public class Interfaz extends javax.swing.JFrame {
         ctdBrazos.setText("Brazos: " + contBrazos);
         ctdPiernas.setText("Piernas: " + contPiernas);
         ctdCuerpos.setText("Cuerpos: " + contCuerpos);
+        lableBtnProd.setText("Botones: " + hilosActivos(productoresBtn));
+        labelBrazosProd.setText("Brazos: " + hilosActivos(productoresBrazos));
+        labelPiernasProd.setText("Piernas: " + hilosActivos(productoresPiernas));
+        labelCuerpoProd.setText("Cuerpos: " + hilosActivos(productoresCuerpos));
+        labelCtdEnsam.setText("Ensambladores: " + hilosActivos(ensambladores));
+
     }
       
 
