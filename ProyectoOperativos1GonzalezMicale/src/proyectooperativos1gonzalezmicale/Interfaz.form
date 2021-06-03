@@ -416,7 +416,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jPanel2" pref="750" max="32767" attributes="0"/>
+              <Component id="jPanel2" pref="786" max="32767" attributes="0"/>
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -436,7 +436,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="jPanel13" max="32767" attributes="0"/>
-                                  <Component id="panelProd" pref="367" max="32767" attributes="0"/>
+                                  <Component id="panelProd" pref="404" max="32767" attributes="0"/>
                               </Group>
                               <Component id="diasRestLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jefeLabel" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -626,10 +626,10 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jPanel8" pref="367" max="32767" attributes="0"/>
-                  <Component id="jPanel6" pref="367" max="32767" attributes="0"/>
-                  <Component id="jPanel4" alignment="0" pref="367" max="32767" attributes="0"/>
-                  <Component id="jPanel7" alignment="0" pref="367" max="32767" attributes="0"/>
+                  <Component id="jPanel8" pref="404" max="32767" attributes="0"/>
+                  <Component id="jPanel6" pref="404" max="32767" attributes="0"/>
+                  <Component id="jPanel4" alignment="0" pref="404" max="32767" attributes="0"/>
+                  <Component id="jPanel7" alignment="0" pref="404" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
