@@ -38,6 +38,7 @@ public class Productor extends Thread {
         
             try {
                 this.semProd.acquire();
+                this.semEnsa.acquire();
                     this.mutex.acquire();
                         especialidad++;
                         System.out.println("La variable subió a " + especialidad + " el hilo " + this.name );

@@ -1136,6 +1136,7 @@ public class Interfaz extends javax.swing.JFrame {
     public void inicializarHilos(int inicioProd, Productor[] tipo){
         for (int i = 0; i < inicioProd; i++) {
             tipo[i].start();
+            System.out.println(tipo[i].name);
         }
     }
     
@@ -1156,6 +1157,7 @@ public class Interfaz extends javax.swing.JFrame {
         for (int i = 0; i < tipo.length; i++) {
             if(!tipo[i].isAlive()){
                 tipo[i].start();
+                System.out.println(tipo[i].name);
                 break;
             }
         }
