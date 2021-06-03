@@ -1226,13 +1226,13 @@ public class Interfaz extends javax.swing.JFrame {
         labelCuerpoProd.setText("Cuerpos: " + hilosActivos(productoresCuerpos));
         labelCtdEnsam.setText("Ensambladores: " + hilosActivos(ensambladores));
         diasRestLabel.setText("Dias restantes: " + dias);
-        if(!Jefe.status) {
+        if(Jefe.status) {
             jefeLabel.setText("Jefe: Despierto");
         } else {
             jefeLabel.setText("Jefe: Dormido");
         }
         
-        if(!Gerente.status) {
+        if(Gerente.status) {
             gerenteLabel.setText("Gerente: Despierto");
         } else {
             gerenteLabel.setText("Gerente: Dormido");
