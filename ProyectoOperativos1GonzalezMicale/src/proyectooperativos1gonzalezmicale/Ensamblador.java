@@ -7,7 +7,8 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author carlo
+ * @author Carlos Gonzalez CI: 26.996.222, 
+ * Ricardo Micale CI: 27.111.658
  */
 public class Ensamblador extends Thread {
     Semaphore mutex;
@@ -20,6 +21,14 @@ public class Ensamblador extends Thread {
     Semaphore semEnsaPiernas = new Semaphore(2);
     Semaphore semEnsaCuerpos = new Semaphore(1);
 
+    /**
+     *Se crea un hilo ensamblador que remueve elementos a los objetos seleccionados.
+     * 
+     * @param semEnsa
+     * @param semProd
+     * @param mutex
+     * @param name
+     */
     public Ensamblador( Semaphore semEnsa, Semaphore semProd,Semaphore mutex, String name) {
         this.mutex = mutex;
         this.semEnsa = semEnsa;

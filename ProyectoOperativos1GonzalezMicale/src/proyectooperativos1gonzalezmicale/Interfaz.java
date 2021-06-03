@@ -10,8 +10,8 @@ import java.util.concurrent.Semaphore;
 
 /**
  *
- * @author Carlos Gonzales
- * Ricardo Micale
+ * @author Carlos Gonzalez CI: 26.996.222, 
+ * Ricardo Micale CI: 27.111.658
  */
 public class Interfaz extends javax.swing.JFrame {
     //tiempo de un dia
@@ -1038,6 +1038,7 @@ public class Interfaz extends javax.swing.JFrame {
         String[] listaDatos;
         File archivo = new File(path);
         
+        //Se obtienen los datos del archivo txt para iniciar el programa.
         try {
             FileReader fr = new FileReader(archivo);
             BufferedReader br = new BufferedReader(fr);
@@ -1047,6 +1048,8 @@ public class Interfaz extends javax.swing.JFrame {
                     datosTxt += linea + "\n";
                 }
             }
+            
+            //Se asignan los valores adecuados a cada parametro.
             listaDatos = datosTxt.split(":");            
             this.tiempo = Integer.parseInt(listaDatos[1]);
             this.dias = Integer.parseInt(listaDatos[3]);
@@ -1065,12 +1068,14 @@ public class Interfaz extends javax.swing.JFrame {
             this.inicioEnsambladores = Integer.parseInt(listaDatos[29]);
             this.maxEnsambladores = Integer.parseInt(listaDatos[31]);
             
+            //Se inicializan los espacios donde estaran la máxima cantidad de productores
             this.productoresBtn = new Productor[maxProdBtn];
             this.productoresBrazos = new Productor[maxProdBrazos];
             this.productoresPiernas = new Productor[maxProdPiernas];
             this.productoresCuerpos = new Productor[maxProdCuerpos];
             this.ensambladores = new Ensamblador[maxEnsambladores];
             
+            //Se asignan las cantidadades máximas de producción y se coloca la máxima cantidad de hilos por productor
             semProdBtn = new Semaphore(maxBtn);
             for (int i = 0; i < maxProdBtn; i++) {
                 String nombre = "botones" + i;
@@ -1110,6 +1115,7 @@ public class Interfaz extends javax.swing.JFrame {
                 ensambladores[i] = ensamblador;
             }
             
+            //Se inicializan los hilos.
             inicializarHilos(inicioProdBtn,productoresBtn);
             inicializarHilos(inicioProdBrazos,productoresBrazos);
             inicializarHilos(inicioProdPiernas,productoresPiernas);
@@ -1120,6 +1126,13 @@ public class Interfaz extends javax.swing.JFrame {
         }
     }
     
+    /**
+     *Se le indica al numero de hilos a correr.
+     * @param inicioProd
+     * Número minimo de hilos que deben comenzar en la producción.
+     * @param tipo
+     * El array de hilos de productores que se quiere comenzar.
+     */
     public void inicializarHilos(int inicioProd, Productor[] tipo){
         for (int i = 0; i < inicioProd; i++) {
             tipo[i].start();
@@ -1132,6 +1145,13 @@ public class Interfaz extends javax.swing.JFrame {
         }
     }
     
+    /**
+     *Se indica iniciar o resumir al siguiente hilo disponible en el array.
+     * @param inicioProd
+     * Maximo numero de hilos.
+     * @param tipo
+     * El array de hilos donde se quieren inicializar.
+     */
     public void agregarHilos(int inicioProd,Productor[] tipo){
         for (int i = 0; i < inicioProd; i++) {
             if(!tipo[i].isAlive()){

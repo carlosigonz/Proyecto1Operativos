@@ -6,8 +6,8 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Carlos Gonzalez
- * Ricardo Micale
+ * @author Carlos Gonzalez CI: 26.996.222, 
+ * Ricardo Micale CI: 27.111.658
  */
 public class Productor extends Thread {
     Semaphore mutex;
@@ -16,6 +16,14 @@ public class Productor extends Thread {
     String name;
     int especialidad;
 
+    /**
+     * Se crea un hilo productor que añade elementos a los objetos seleccionados.
+     * @param semEnsa
+     * @param semProd
+     * @param mutex
+     * @param especialidad
+     * @param name
+     */
     public Productor(Semaphore semEnsa, Semaphore semProd, Semaphore mutex,int especialidad  ,String name) {
         this.mutex = mutex;
         this.semEnsa = semEnsa;
