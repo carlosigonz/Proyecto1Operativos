@@ -18,6 +18,7 @@ public class Jefe extends Thread {
     Semaphore semActivo;
     Semaphore semDormido;
     int tiempo;
+    public static volatile boolean status;
     
     public Jefe(Semaphore mutex, Semaphore semActivo, Semaphore semDormido, int tiempo) {
         this.mutex = mutex;
@@ -29,12 +30,22 @@ public class Jefe extends Thread {
     public void run() {
         while(true) {
             try {
-                Interfaz.dias--;
+                this.semActivo.acquire();
+                this.mutex.acquire();
+                
                 System.out.println("Jefe Despierto");
-                TimeUnit.SECONDS.sleep(tiempo/3);
+                Thread.sleep(tiempo/3);
+                this.status = true;
+                
+                if(!Gerente.status) {
+                    Interfaz.dias--;
+                }
                 
                 System.out.println("Jefe dormido");
-                TimeUnit.SECONDS.sleep((2*tiempo)/3);
+                Thread.sleep((2*tiempo)/3);
+                this.status = false;
+                this.mutex.release();
+                this.semDormido.release();
                 
             } catch(InterruptedException ex) {
                 Logger.getLogger(Productor.class.getName()).log(Level.SEVERE, null, ex);
