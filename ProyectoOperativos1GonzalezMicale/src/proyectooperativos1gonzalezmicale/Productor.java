@@ -48,6 +48,7 @@ public class Productor extends Thread {
                         Interfaz.contBotones = Interfaz.contBotones + 1;
                         this.mutex.release();
                         this.semEnsa.release();
+                        break;
                     case "brazos":
                         this.semProd.acquire();
                         this.mutex.acquire();
@@ -57,6 +58,7 @@ public class Productor extends Thread {
                         Interfaz.contBrazos = Interfaz.contBrazos + 1;
                         this.mutex.release();
                         this.semEnsa.release();
+                        break;
                     case "piernas":
                         this.semProd.acquire();
                         this.mutex.acquire();
@@ -66,6 +68,7 @@ public class Productor extends Thread {
                         Interfaz.contPiernas = Interfaz.contPiernas + 1;
                         this.mutex.release();
                         this.semEnsa.release();
+                        break;
                     case "cuerpos":
                         this.semProd.acquire();
                         this.mutex.acquire();
@@ -75,6 +78,7 @@ public class Productor extends Thread {
                         Interfaz.contCuerpos = Interfaz.contCuerpos + 1;
                         this.mutex.release();
                         this.semEnsa.release();
+                        break;
                 }
             } catch (InterruptedException ex) {
                 Logger.getLogger(Productor.class.getName()).log(Level.SEVERE, null, ex);
