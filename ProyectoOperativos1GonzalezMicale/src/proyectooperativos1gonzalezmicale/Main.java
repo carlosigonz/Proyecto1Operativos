@@ -28,7 +28,7 @@ public class Main extends Thread {
             try {
                 mutex.acquire();
                 interfaz.actualizarContadores();
-                Thread.sleep(2000);
+                Thread.sleep(Interfaz.tiempo);
                 mutex.release();
             } catch (InterruptedException ex) {
                 Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
