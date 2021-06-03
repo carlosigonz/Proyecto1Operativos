@@ -39,21 +39,19 @@ public class Ensamblador extends Thread {
     public void run(){
         while(true){
             try {
-                semEnsaBtn.acquire();
-                semEnsaBrazos.acquire();
-                semEnsaPiernas.acquire();
-                semEnsaCuerpos.acquire();
+                if(botones>=8&&brazos>=2&&piernas>=2&&cuerpos>=1){
                 this.semEnsa.acquire();
                     this.mutex.acquire();
-                       botones--;
-                        brazos--;
-                        piernas--;
-                        cuerpos--;
+                       botones = botones - 8;
+                       brazos = brazos - 2;
+                       piernas = piernas - 2;
+                       cuerpos = cuerpos - 1;
                         panas++;
                         System.out.println("La variable pana subio a "+ panas + " el hilo " + this.name );
                         Thread.sleep(1000);
                     this.mutex.release();
                 this.semProd.release();
+                }
             } catch (InterruptedException ex) {
                 Logger.getLogger(Productor.class.getName()).log(Level.SEVERE, null, ex);
             }    

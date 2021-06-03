@@ -935,6 +935,7 @@ public class Interfaz extends javax.swing.JFrame {
     private void aggBotonesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aggBotonesActionPerformed
         agregarHilos(productoresBtn);
         System.out.println("Agregado productor boton");
+        System.out.println(contBotones);
     }//GEN-LAST:event_aggBotonesActionPerformed
 
     private void aggBrazosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aggBrazosActionPerformed
@@ -1085,28 +1086,28 @@ public class Interfaz extends javax.swing.JFrame {
             semProdBtn = new Semaphore(maxBtn);
             for (int i = 0; i < maxProdBtn; i++) {
                 String nombre = "botones" + i;
-                Productor prodBtn = new Productor(semEnsaBtn, semProdBtn, mutexBtn,contBotones ,nombre);
+                Productor prodBtn = new Productor(semEnsaBtn, semProdBtn, mutexBtn,"botones" ,nombre);
                 productoresBtn[i] = prodBtn;
             }
             
             semProdBrazos = new Semaphore(maxBrazos);
             for (int i = 0; i < maxProdBrazos; i++) {
                 String nombre = "brazos" + i;
-                Productor prodBrazos = new Productor(semEnsaBrazos, semProdBrazos, mutexBrazos,contBrazos ,nombre);
+                Productor prodBrazos = new Productor(semEnsaBrazos, semProdBrazos, mutexBrazos, "brazos",nombre);
                 productoresBrazos[i] = prodBrazos;
             }
             
             semProdPiernas = new Semaphore(maxPiernas);
             for (int i = 0; i < maxProdPiernas; i++) {
                 String nombre = "piernas" + i;
-                Productor prodPiernas = new Productor(semEnsaPiernas, semProdPiernas, mutexPiernas,contPiernas ,nombre);
+                Productor prodPiernas = new Productor(semEnsaPiernas, semProdPiernas, mutexPiernas, "piernas" ,nombre);
                 productoresPiernas[i] = prodPiernas;
             }
             
             semProdCuerpos = new Semaphore(maxCuerpos);
             for (int i = 0; i < maxProdCuerpos; i++) {
                 String nombre = "cuerpos" + i;
-                Productor prodCuerpos = new Productor(semEnsaCuerpos, semProdCuerpos, mutexCuerpos,contCuerpos ,nombre);
+                Productor prodCuerpos = new Productor(semEnsaCuerpos, semProdCuerpos, mutexCuerpos,"cuerpos" ,nombre);
                 productoresCuerpos[i] = prodCuerpos;
             }
             
@@ -1152,6 +1153,7 @@ public class Interfaz extends javax.swing.JFrame {
     public void inicializarHilos(int inicioProd, Productor[] tipo){
         for (int i = 0; i < inicioProd; i++) {
             tipo[i].start();
+            System.out.println(tipo[i].name);
         }
     }
     
@@ -1172,6 +1174,7 @@ public class Interfaz extends javax.swing.JFrame {
         for (int i = 0; i < tipo.length; i++) {
             if(!tipo[i].isAlive()){
                 tipo[i].start();
+                System.out.println(tipo[i].name);
                 break;
             }
         }
@@ -1184,6 +1187,10 @@ public class Interfaz extends javax.swing.JFrame {
                 break;
             }
         }
+    }
+    
+    public void actualizarContadores(){
+        
     }
       
 
