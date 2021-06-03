@@ -1196,9 +1196,13 @@ public class Interfaz extends javax.swing.JFrame {
         System.out.println("Botones:" + contBotones + " Brazos:" + contBrazos +
         " Piernas:" + contPiernas + " Cuerpos:" + contCuerpos + " Panas:" + contPanas);
         ctdBtns.setText("Botones: " + contBotones);
-        ctdBrazos.setText("Botones: " + contBrazos);
-        ctdPiernas.setText("Botones: " + contPiernas);
-        ctdCuerpos.setText("Botones: " + contCuerpos);
+        ctdBrazos.setText("Brazos: " + contBrazos);
+        ctdPiernas.setText("Piernas: " + contPiernas);
+        ctdCuerpos.setText("Cuerpos: " + contCuerpos);
+//        lableBtnProd.setText("Botones: " + productoresBtn.length);
+//        labelBrazosProd.setText("Brazos: " + productoresBrazos.length);
+//        labelPiernasProd.setText("Piernas: " + productoresPiernas.length);
+//        labelCuerpoProd.setText("Cuerpos: " + productoresCuerpos.length);
     }
       
 
