@@ -1190,7 +1190,8 @@ public class Interfaz extends javax.swing.JFrame {
     }
     
     public void actualizarContadores(){
-        
+        System.out.println("Botones:" + contBotones + " Brazos:" + contBrazos +
+        " Piernas:" + contPiernas + " Cuerpos:" + contCuerpos + " Panas:" + contPanas);
     }
       
 

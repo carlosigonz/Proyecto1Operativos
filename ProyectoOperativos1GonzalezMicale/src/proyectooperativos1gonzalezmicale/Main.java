@@ -2,18 +2,21 @@ package proyectooperativos1gonzalezmicale;
 
 import java.io.IOException;
 import java.util.concurrent.Semaphore;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Carlos Gonzalez CI: 26.996.222, 
  * Ricardo Micale CI: 27.111.658
  */
-public class Main {
+public class Main extends Thread {
     
 
     
     
     public static void main(String[] args) {
+        Semaphore mutex = new Semaphore(1);
         Interfaz interfaz = new Interfaz();
         try {
             interfaz.leerTxt();
@@ -21,6 +24,16 @@ public class Main {
             System.out.println("Hubo un error");
         }
         interfaz.setVisible(true);
+        while(true){
+            try {
+                mutex.acquire();
+                interfaz.actualizarContadores();
+                Thread.sleep(2000);
+                mutex.release();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 //    public static volatile int botones = 0;
 //    public static volatile int brazos = 0;
