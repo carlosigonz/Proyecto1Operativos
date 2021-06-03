@@ -927,22 +927,22 @@ public class Interfaz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void aggBotonesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aggBotonesActionPerformed
-        agregarHilos(inicioProdBtn,productoresBtn);
+        agregarHilos(productoresBtn);
         System.out.println("Agregado productor boton");
     }//GEN-LAST:event_aggBotonesActionPerformed
 
     private void aggBrazosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aggBrazosActionPerformed
-        agregarHilos(inicioProdBrazos,productoresBrazos);
+        agregarHilos(productoresBrazos);
         System.out.println("Agregado productor brazos");
     }//GEN-LAST:event_aggBrazosActionPerformed
 
     private void aggPiernasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aggPiernasActionPerformed
-        agregarHilos(inicioProdPiernas,productoresPiernas);
+        agregarHilos(productoresPiernas);
         System.out.println("Agregado productor piernas");
     }//GEN-LAST:event_aggPiernasActionPerformed
 
     private void aggCuerpoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aggCuerpoActionPerformed
-        agregarHilos(inicioProdBtn,productoresCuerpos);
+        agregarHilos(productoresCuerpos);
         System.out.println("Agregado productor cuerpos");
     }//GEN-LAST:event_aggCuerpoActionPerformed
 
@@ -988,7 +988,7 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_delEnsambladorActionPerformed
 
     private void aggEnsambladorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aggEnsambladorActionPerformed
-        agregarHilos(inicioEnsambladores,ensambladores);
+        agregarHilos(ensambladores);
         System.out.println("Agregado productor boton");
     }//GEN-LAST:event_aggEnsambladorActionPerformed
 
@@ -1152,8 +1152,8 @@ public class Interfaz extends javax.swing.JFrame {
      * @param tipo
      * El array de hilos donde se quieren inicializar.
      */
-    public void agregarHilos(int inicioProd,Productor[] tipo){
-        for (int i = 0; i < inicioProd; i++) {
+    public void agregarHilos(Productor[] tipo){
+        for (int i = 0; i < tipo.length; i++) {
             if(!tipo[i].isAlive()){
                 tipo[i].start();
                 break;
@@ -1161,8 +1161,8 @@ public class Interfaz extends javax.swing.JFrame {
         }
     }
     
-    public void agregarHilos(int inicioProd, Ensamblador[] tipo){
-        for (int i = 0; i < inicioProd; i++) {
+    public void agregarHilos(Ensamblador[] tipo){
+        for (int i = 0; i < tipo.length; i++) {
             if(!tipo[i].isAlive()){
                 tipo[i].start();
                 break;
