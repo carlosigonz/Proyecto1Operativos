@@ -15,8 +15,8 @@ public class Productor extends Thread {
     Semaphore semProd;
     String name;
     String produccion;
-    Interfaz interfaz;
-
+    boolean vivo = true;
+    
     /**
      * Se crea un hilo productor que añade elementos a los objetos seleccionados.
      * @param semEnsa
@@ -35,7 +35,7 @@ public class Productor extends Thread {
 
     
     public void run(){
-        while(true){
+        while(vivo){
         
             try {
                 switch(this.produccion){
@@ -82,8 +82,7 @@ public class Productor extends Thread {
                 }
             } catch (InterruptedException ex) {
                 Logger.getLogger(Productor.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
+            } 
         }
     }
 }

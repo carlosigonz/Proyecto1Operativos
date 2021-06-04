@@ -928,7 +928,6 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void aggBotonesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aggBotonesActionPerformed
         agregarHilos(productoresBtn);
-        System.out.println("Agregado productor boton");
         System.out.println(contBotones);
     }//GEN-LAST:event_aggBotonesActionPerformed
 
@@ -964,7 +963,7 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void delBotonesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delBotonesActionPerformed
-        // TODO add your handling code here:
+        eliminarHilos(productoresBtn);
     }//GEN-LAST:event_delBotonesActionPerformed
 
     private void delBrazosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delBrazosActionPerformed
@@ -1167,6 +1166,7 @@ public class Interfaz extends javax.swing.JFrame {
             if(!tipo[i].isAlive()){
                 tipo[i].start();
                 System.out.println(tipo[i].name);
+                System.out.println("Agregado productor boton");
                 break;
             }
         }
@@ -1181,6 +1181,40 @@ public class Interfaz extends javax.swing.JFrame {
         }
     }
     
+    public void eliminarHilos(Productor[] tipo){
+        Semaphore newMutex = tipo[0].mutex;
+        Semaphore newEnsa = tipo[0].semEnsa;
+        Semaphore newProd = tipo[0].semProd;
+        String newProduccion = tipo[0].produccion;
+        for (int i = tipo.length-1; i > 0; i--) {
+            if(tipo[i].isAlive()){
+                System.out.println(tipo[i].name);
+                tipo[i].vivo = false;
+                String newNombre = "botones" + i;
+                tipo[i] = new Productor(newEnsa,newProd,newMutex,newProduccion,newNombre);
+                System.out.println(tipo[i].name);
+                System.out.println("Eliminado productor boton");
+                break;
+            }
+        }
+    }
+    
+    public void eliminarHilos(Ensamblador[] tipo){
+        Semaphore newMutex = tipo[0].mutex;
+        Semaphore newEnsa = tipo[0].semEnsa;
+        Semaphore newProd = tipo[0].semProd;
+        for (int i = tipo.length-1; i > 0; i--) {
+            if(tipo[i].isAlive()){
+                System.out.println(tipo[i].name);
+                tipo[i].vivo = false;
+                String newNombre = "botones" + i;
+                tipo[i] = new Ensamblador(newEnsa,newProd,newMutex,newNombre);
+                System.out.println(tipo[i].name);
+                System.out.println("Eliminado productor boton");
+                break;
+            }
+        }
+    }
     
     public int hilosActivos(Productor[] tipo){
         int aux=0;
