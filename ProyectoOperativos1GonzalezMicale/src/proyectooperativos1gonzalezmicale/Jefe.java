@@ -32,16 +32,15 @@ public class Jefe extends Thread {
             try {
                 this.semActivo.acquire();
                 this.mutex.acquire();
-                
-                this.status = true;
-                System.out.println("Jefe Despierto");
-                Thread.sleep(tiempo/3);
-                
-                
+
+                Interfaz.dias--;
+
                 if(!Gerente.status) {
-                    Interfaz.dias--;
-                }
-                
+                    this.status = true;
+                    System.out.println("Jefe Despierto");
+                    Thread.sleep(tiempo/3);
+                } 
+
                 this.status = false;
                 System.out.println("Jefe dormido");
                 Thread.sleep((2*tiempo)/3);

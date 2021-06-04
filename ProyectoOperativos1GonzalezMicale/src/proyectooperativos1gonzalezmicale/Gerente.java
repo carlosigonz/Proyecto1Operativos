@@ -37,19 +37,23 @@ public class Gerente extends Thread {
                 
                 this.status = true;
                 System.out.println("Gerente Despierto");
-                Thread.sleep(tiempo/3);
                 
-                
-                if(Interfaz.dias == 0 && !Jefe.status) {
-                    Interfaz.dias = dias;
-                    Interfaz.contPanasTotales += Interfaz.contPanas;
-                    Interfaz.contPanas = 0;
+                if(!Jefe.status) {
+                    
+                    if(Interfaz.dias == 0) {
+                        Interfaz.dias = dias;
+                        Interfaz.contPanasTotales += Interfaz.contPanas;
+                        Interfaz.contPanas = 0;
+                    }
+                    
+                } else {
+                    Thread.sleep(tiempo/3);
                 }
                 
                 this.status = false;
+                    
                 System.out.println("Gerente dormido");
                 Thread.sleep((2*tiempo)/3);
-                
                 
                 this.mutex.release();
                 this.semActivo.release();
