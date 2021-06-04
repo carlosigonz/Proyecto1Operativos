@@ -19,6 +19,7 @@ public class Ensamblador extends Thread {
     Semaphore semEnsaBrazos = new Semaphore(2);
     Semaphore semEnsaPiernas = new Semaphore(2);
     Semaphore semEnsaCuerpos = new Semaphore(1);
+    boolean vivo = true;
 
     /**
      *Se crea un hilo ensamblador que remueve elementos a los objetos seleccionados.
@@ -36,7 +37,7 @@ public class Ensamblador extends Thread {
     }
     
     public void run(){
-        while(true){
+        while(vivo){
             try {
                 if(Interfaz.contBotones >= 8 && Interfaz.contBrazos >= 2 && Interfaz.contPiernas >= 2 && Interfaz.contCuerpos >= 1){
                     this.semEnsa.acquire();
