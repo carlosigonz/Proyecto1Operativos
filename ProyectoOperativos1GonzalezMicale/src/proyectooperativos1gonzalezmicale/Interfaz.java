@@ -933,17 +933,14 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void aggBrazosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aggBrazosActionPerformed
         agregarHilos(productoresBrazos);
-        System.out.println("Agregado productor brazos");
     }//GEN-LAST:event_aggBrazosActionPerformed
 
     private void aggPiernasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aggPiernasActionPerformed
         agregarHilos(productoresPiernas);
-        System.out.println("Agregado productor piernas");
     }//GEN-LAST:event_aggPiernasActionPerformed
 
     private void aggCuerpoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aggCuerpoActionPerformed
         agregarHilos(productoresCuerpos);
-        System.out.println("Agregado productor cuerpos");
     }//GEN-LAST:event_aggCuerpoActionPerformed
 
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
@@ -989,7 +986,6 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void aggEnsambladorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aggEnsambladorActionPerformed
         agregarHilos(ensambladores);
-        System.out.println("Agregado ensamblador boton");
     }//GEN-LAST:event_aggEnsambladorActionPerformed
 
     private void aggBotonesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aggBotonesMouseClicked
@@ -1166,7 +1162,7 @@ public class Interfaz extends javax.swing.JFrame {
             if(!tipo[i].isAlive()){
                 tipo[i].start();
                 System.out.println(tipo[i].name);
-                System.out.println("Agregado productor boton");
+                System.out.println("Agregado productor" + tipo[i].produccion);
                 break;
             }
         }
@@ -1176,6 +1172,7 @@ public class Interfaz extends javax.swing.JFrame {
         for (int i = 0; i < tipo.length; i++) {
             if(!tipo[i].isAlive()){
                 tipo[i].start();
+                System.out.println("Agregado ensamblador");
                 break;
             }
         }
@@ -1192,8 +1189,7 @@ public class Interfaz extends javax.swing.JFrame {
                 tipo[i].vivo = false;
                 String newNombre = "botones" + i;
                 tipo[i] = new Productor(newEnsa,newProd,newMutex,newProduccion,newNombre);
-                System.out.println(tipo[i].name);
-                System.out.println("Eliminado productor boton");
+                System.out.println("Eliminado productor");
                 break;
             }
         }
@@ -1210,7 +1206,7 @@ public class Interfaz extends javax.swing.JFrame {
                 String newNombre = "botones" + i;
                 tipo[i] = new Ensamblador(newEnsa,newProd,newMutex,newNombre);
                 System.out.println(tipo[i].name);
-                System.out.println("Eliminado productor boton");
+                System.out.println("Eliminado ensamblador");
                 break;
             }
         }
