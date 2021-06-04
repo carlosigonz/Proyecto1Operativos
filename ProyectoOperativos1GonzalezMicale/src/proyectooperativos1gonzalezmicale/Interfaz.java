@@ -967,15 +967,15 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_delBotonesActionPerformed
 
     private void delBrazosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delBrazosActionPerformed
-        // TODO add your handling code here:
+        eliminarHilos(productoresBrazos);
     }//GEN-LAST:event_delBrazosActionPerformed
 
     private void delPiernasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delPiernasActionPerformed
-        // TODO add your handling code here:
+        eliminarHilos(productoresPiernas);
     }//GEN-LAST:event_delPiernasActionPerformed
 
     private void delCuerpoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delCuerpoActionPerformed
-        // TODO add your handling code here:
+        eliminarHilos(productoresCuerpos);
     }//GEN-LAST:event_delCuerpoActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -984,7 +984,7 @@ public class Interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void delEnsambladorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delEnsambladorActionPerformed
-        // TODO add your handling code here:
+        eliminarHilos(ensambladores);
     }//GEN-LAST:event_delEnsambladorActionPerformed
 
     private void aggEnsambladorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aggEnsambladorActionPerformed
