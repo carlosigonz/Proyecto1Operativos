@@ -1,5 +1,5 @@
 tiempo:10000:
-dias:30:
+dias:15:
 botones:60:
 brazos:40:
 piernas:36:
