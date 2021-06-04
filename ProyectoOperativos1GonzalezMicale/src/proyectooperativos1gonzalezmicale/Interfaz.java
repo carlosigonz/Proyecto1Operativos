@@ -65,7 +65,7 @@ public class Interfaz extends javax.swing.JFrame {
     Semaphore semEnsaPiernas = new Semaphore(2);
     Semaphore semEnsaCuerpos = new Semaphore(1);
     //semaforo del ensamblador
-    Semaphore semEnsaEns = new Semaphore(13);
+    Semaphore semEnsaEns = new Semaphore(99999);
     //cantidad productores de cada parte
     Productor[] productoresBtn;
     Productor[] productoresBrazos;
@@ -1213,19 +1213,21 @@ public class Interfaz extends javax.swing.JFrame {
         ctdPiernas.setText("Piernas: " + contPiernas);
         ctdCuerpos.setText("Cuerpos: " + contCuerpos);
         panasDisponLabel.setText(String.valueOf(contPanas));
+        panasTotalesLabel.setText(String.valueOf(contPanasTotales));
         lableBtnProd.setText("Botones: " + hilosActivos(productoresBtn));
         labelBrazosProd.setText("Brazos: " + hilosActivos(productoresBrazos));
         labelPiernasProd.setText("Piernas: " + hilosActivos(productoresPiernas));
         labelCuerpoProd.setText("Cuerpos: " + hilosActivos(productoresCuerpos));
         labelCtdEnsam.setText("Ensambladores: " + hilosActivos(ensambladores));
         diasRestLabel.setText("Dias restantes: " + dias);
-        if(jefe.status) {
+        
+        if(Jefe.status) {
             jefeLabel.setText("Jefe: Despierto");
         } else {
             jefeLabel.setText("Jefe: Dormido");
         }
         
-        if(gerente.status) {
+        if(Gerente.status) {
             gerenteLabel.setText("Gerente: Despierto");
         } else {
             gerenteLabel.setText("Gerente: Dormido");
