@@ -65,7 +65,7 @@ public class Interfaz extends javax.swing.JFrame {
     Semaphore semEnsaPiernas = new Semaphore(2);
     Semaphore semEnsaCuerpos = new Semaphore(1);
     //semaforo del ensamblador
-    Semaphore semEnsaEns = new Semaphore(0);
+    Semaphore semEnsaEns = new Semaphore(13);
     //cantidad productores de cada parte
     Productor[] productoresBtn;
     Productor[] productoresBrazos;
@@ -990,7 +990,7 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void aggEnsambladorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aggEnsambladorActionPerformed
         agregarHilos(ensambladores);
-        System.out.println("Agregado productor boton");
+        System.out.println("Agregado ensamblador boton");
     }//GEN-LAST:event_aggEnsambladorActionPerformed
 
     private void aggBotonesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_aggBotonesMouseClicked
@@ -1151,6 +1151,7 @@ public class Interfaz extends javax.swing.JFrame {
     public void inicializarHilos(int inicioProd, Ensamblador[] tipo){
         for (int i = 0; i < inicioProd; i++) {
             tipo[i].start();
+            System.out.println(tipo[i].name);
         }
     }
     
@@ -1211,6 +1212,7 @@ public class Interfaz extends javax.swing.JFrame {
         ctdBrazos.setText("Brazos: " + contBrazos);
         ctdPiernas.setText("Piernas: " + contPiernas);
         ctdCuerpos.setText("Cuerpos: " + contCuerpos);
+        panasDisponLabel.setText(String.valueOf(contPanas));
         lableBtnProd.setText("Botones: " + hilosActivos(productoresBtn));
         labelBrazosProd.setText("Brazos: " + hilosActivos(productoresBrazos));
         labelPiernasProd.setText("Piernas: " + hilosActivos(productoresPiernas));
