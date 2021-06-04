@@ -48,7 +48,7 @@ public class Ensamblador extends Thread {
                     Interfaz.contPiernas = Interfaz.contPiernas - 2;
                     Interfaz.contCuerpos = Interfaz.contCuerpos - 1;
                     Interfaz.contPanas++;
-                    System.out.println("La variable pana subio a "+ Interfaz.contPanas + " el hilo " + this.name );
+//                    System.out.println("La variable pana subio a "+ Interfaz.contPanas + " el hilo " + this.name );
                 }
                 Thread.sleep(Interfaz.tiempo);
                 

@@ -36,7 +36,6 @@ public class Gerente extends Thread {
                 this.mutex.acquire();
                 
                 this.status = true;
-                System.out.println("Gerente Despierto");
                 
                 if(!Jefe.status) {
                     
@@ -52,7 +51,6 @@ public class Gerente extends Thread {
                 
                 this.status = false;
                     
-                System.out.println("Gerente dormido");
                 Thread.sleep((2*tiempo)/3);
                 
                 this.mutex.release();
